@@ -1,4 +1,4 @@
-import { Clock3, Mail, MapPin, Phone } from 'lucide-react';
+import { Clock3, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const navigation = [
@@ -59,6 +59,15 @@ export default function Footer() {
               <div className="text-sm">
                 <p className="text-xs text-ink/45">Phone 2</p>
                 <p className="mt-0.5 text-ink/75 transition-colors duration-300 group-hover:text-primary">+971 55 527 6288</p>
+              </div>
+            </a>
+
+            {/* WhatsApp */}
+            <a href="https://wa.me/971506659694" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3">
+              <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary transition-colors duration-300 group-hover:text-primary-600" strokeWidth={1.8} />
+              <div className="text-sm">
+                <p className="text-xs text-ink/45">WhatsApp</p>
+                <p className="mt-0.5 text-ink/75 transition-colors duration-300 group-hover:text-primary">+971 50 665 9694</p>
               </div>
             </a>
 
