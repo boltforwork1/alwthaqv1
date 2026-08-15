@@ -106,7 +106,7 @@ export default function About() {
             >
               <div className="overflow-hidden rounded-2xl shadow-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1497366811353-6860743d7491?auto=format&fit=crop&q=80&w=1200"
+                  src="/images/about.jpg"
                   alt="Modern Dubai office"
                   className="h-[400px] w-full object-cover"
                 />
