@@ -285,14 +285,16 @@ export default function Home() {
             <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
               {/* Left column — text */}
               <div>
-              <motion.span
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              <span
                 className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm text-white"
               >
-                <span className="h-2 w-2 rounded-full bg-green-400" />
+                <motion.span
+                  animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8], filter: ['blur(2px)', 'blur(0px)', 'blur(2px)'] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  className="h-2 w-2 rounded-full bg-[#2EE6A6]"
+                />
                 Your Trusted Government Services Partner
-              </motion.span>
+              </span>
 
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
