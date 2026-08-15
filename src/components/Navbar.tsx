@@ -16,7 +16,7 @@ export default function Navbar() {
           <img
             src="/logo.png"
             alt="Al Wthaq Group"
-            className="h-16 w-auto object-contain"
+            className="h-16 w-auto object-contain md:h-24"
           />
         </Link>
 

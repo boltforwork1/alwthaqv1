@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { animate, motion, useInView } from 'framer-motion';
 import {
+  ArrowRight,
   BookUser,
   Briefcase,
   Building2,
   Car,
   CheckCircle2,
   Clock,
+  Phone,
   ShieldCheck,
 } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
@@ -104,7 +106,7 @@ function StatItem({
   const display = value >= 1000 ? Math.round(count).toLocaleString() : Math.round(count);
   return (
     <div className="text-center">
-      <div className="text-4xl font-bold tracking-tight text-secondary sm:text-5xl lg:text-6xl">
+      <div className="min-w-[150px] text-4xl font-bold tabular-nums tracking-tight text-secondary sm:text-5xl lg:text-6xl">
         {display}
         {suffix}
       </div>
@@ -112,6 +114,48 @@ function StatItem({
         {label}
       </div>
     </div>
+  );
+}
+
+/* ---------- Lead form card ---------- */
+function LeadFormCard() {
+  return (
+    <motion.form
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease, delay: 0.35 }}
+      onSubmit={(e) => e.preventDefault()}
+      className="rounded-2xl border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-md"
+    >
+      <h3 className="text-2xl font-bold text-white">Request a Free Quote</h3>
+      <p className="mb-6 mt-1 text-gray-300">Tell us a little about your business goals.</p>
+
+      <div className="mb-4">
+        <label className="mb-2 block text-sm text-gray-200">Full Name</label>
+        <input
+          type="text"
+          placeholder="John Doe"
+          className="w-full rounded-lg border border-white/20 bg-black/20 p-3 text-white placeholder-gray-400 focus:border-green-500 focus:outline-none"
+        />
+      </div>
+
+      <div className="mb-6">
+        <label className="mb-2 block text-sm text-gray-200">Email / Phone</label>
+        <input
+          type="text"
+          placeholder="you@example.com"
+          className="w-full rounded-lg border border-white/20 bg-black/20 p-3 text-white placeholder-gray-400 focus:border-green-500 focus:outline-none"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-secondary px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#155f30]"
+      >
+        Request A Free Quote
+        <ArrowRight className="h-4 w-4" />
+      </button>
+    </motion.form>
   );
 }
 
@@ -123,69 +167,75 @@ export default function Home() {
   return (
     <PageTransition>
       {/* ===== Hero ===== */}
-      <section className="relative flex min-h-[88vh] items-center justify-center overflow-hidden px-6 py-24">
-        {/* abstract shapes */}
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -left-32 top-10 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
-          <div className="absolute -right-24 bottom-0 h-[28rem] w-[28rem] rounded-full bg-secondary/10 blur-3xl" />
-          <div className="absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/5 blur-2xl" />
-        </div>
+      <section className="relative flex min-h-screen items-center overflow-hidden bg-[url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80')] bg-cover bg-center">
+        {/* dark overlay */}
+        <div className="absolute inset-0 bg-[#111111]/80" />
 
-        <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease }}
-            className="inline-block rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-medium tracking-wide text-primary"
-          >
-            Government Transaction Clearance
-          </motion.span>
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-24">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+            {/* Left column — text */}
+            <div>
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease }}
+                className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm text-white"
+              >
+                <span className="h-2 w-2 rounded-full bg-green-400" />
+                Your Trusted Government Services Partner
+              </motion.span>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease, delay: 0.1 }}
-            className="mt-7 text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl lg:text-6xl"
-          >
-            Clear Your Government Transactions
-            <br />
-            with Ease and Speed
-          </motion.h1>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease, delay: 0.1 }}
+                className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
+              >
+                Business Setup &amp;{' '}
+                <span className="text-secondary">Government Transactions</span> in UAE
+              </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease, delay: 0.2 }}
-            className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink/60 sm:text-lg"
-          >
-            Our comprehensive services cover all individual and corporate needs with official
-            authorities. We save your time and effort while avoiding common errors and violations.
-          </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease, delay: 0.2 }}
+                className="mb-8 mt-6 max-w-xl text-lg leading-relaxed text-gray-300"
+              >
+                Our comprehensive services cover all individual and corporate needs with
+                official authorities. We save your time and effort while avoiding common errors.
+              </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease, delay: 0.3 }}
-            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-          >
-            <a
-              href="/contact"
-              className="rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-600 hover:shadow-xl hover:shadow-primary/30"
-            >
-              Contact Us Now
-            </a>
-            <a
-              href="/services"
-              className="rounded-full border border-secondary/40 bg-white/50 px-8 py-3.5 text-sm font-semibold text-secondary backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-secondary hover:bg-secondary hover:text-white hover:shadow-lg hover:shadow-secondary/20"
-            >
-              Explore Services
-            </a>
-          </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease, delay: 0.3 }}
+                className="flex flex-col gap-4 sm:flex-row sm:items-center"
+              >
+                <a
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-full bg-secondary px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-secondary/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#155f30]"
+                >
+                  Contact Us Now
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="tel:+97142388381"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10"
+                >
+                  <Phone className="h-4 w-4" />
+                  +971 4 238 8381
+                </a>
+              </motion.div>
+            </div>
+
+            {/* Right column — lead form */}
+            <LeadFormCard />
+          </div>
         </div>
       </section>
 
-      {/* ===== Statistics (dark) ===== */}
-      <section className="bg-ink py-20 lg:py-24">
+      {/* ===== Statistics (full-width dark band) ===== */}
+      <section className="w-full bg-ink py-20 lg:py-24">
         <div
           ref={statsRef}
           className="mx-auto grid max-w-7xl grid-cols-2 gap-12 px-6 lg:grid-cols-4 lg:gap-8 lg:px-10"
