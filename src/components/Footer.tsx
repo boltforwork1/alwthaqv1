@@ -1,4 +1,4 @@
-import { Clock3, Globe, Mail, MapPin, Phone, User } from 'lucide-react';
+import { Clock3, Mail, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const navigation = [
@@ -71,30 +71,12 @@ export default function Footer() {
               </div>
             </a>
 
-            {/* Website */}
-            <a href="https://www.alwethaqgroup.com" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3">
-              <Globe className="mt-0.5 h-4 w-4 shrink-0 text-primary transition-colors duration-300 group-hover:text-primary-600" strokeWidth={1.8} />
-              <div className="text-sm">
-                <p className="text-xs text-ink/45">Website</p>
-                <p className="mt-0.5 text-ink/75 transition-colors duration-300 group-hover:text-primary">www.alwethaqgroup.com</p>
-              </div>
-            </a>
-
             {/* Address — plain text, not clickable */}
             <div className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" strokeWidth={1.8} />
               <div className="text-sm">
                 <p className="text-xs text-ink/45">Address</p>
                 <p className="mt-0.5 text-ink/75">Al Nuaimiya 1, Ajman, UAE, P.O Box: 067049022</p>
-              </div>
-            </div>
-
-            {/* Manager — plain text */}
-            <div className="flex items-start gap-3">
-              <User className="mt-0.5 h-4 w-4 shrink-0 text-primary" strokeWidth={1.8} />
-              <div className="text-sm">
-                <p className="text-xs text-ink/45">Manager</p>
-                <p className="mt-0.5 text-ink/75">Emad Basheir (General Manager)</p>
               </div>
             </div>
 

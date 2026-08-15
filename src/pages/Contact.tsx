@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Clock3, Globe, Mail, MapPin, Phone, User } from 'lucide-react';
+import { ArrowRight, Clock3, Mail, MapPin, Phone } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
 
 /* ---------- Shared animation helpers ---------- */
@@ -25,9 +25,7 @@ const contactInfo = [
   { icon: Phone, label: 'Phone 1', value: '+971 52 668 4071', href: 'tel:+971526684071' },
   { icon: Phone, label: 'Phone 2', value: '+971 55 527 6288', href: 'tel:+971555276288' },
   { icon: Mail, label: 'Email', value: 'alwethaqgroup@gmail.com', href: 'mailto:alwethaqgroup@gmail.com' },
-  { icon: Globe, label: 'Website', value: 'www.alwethaqgroup.com', href: 'https://www.alwethaqgroup.com' },
   { icon: MapPin, label: 'Address', value: 'Al Nuaimiya 1, Ajman, UAE, P.O Box: 067049022' },
-  { icon: User, label: 'Manager', value: 'Emad Basheir (General Manager)' },
 ];
 
 /* ---------- Page ---------- */
