@@ -1,4 +1,4 @@
-import { Clock3, Mail, MapPin, Phone } from 'lucide-react';
+import { Clock3, Globe, Mail, MapPin, Phone, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const navigation = [
@@ -6,13 +6,6 @@ const navigation = [
   { label: 'About', to: '/about' },
   { label: 'Services', to: '/services' },
   { label: 'Contact', to: '/contact' },
-];
-
-const contactDetails = [
-  { icon: MapPin, label: 'Address', value: 'Riyadh, Saudi Arabia' },
-  { icon: Phone, label: 'Phone', value: '+966 00 000 0000' },
-  { icon: Mail, label: 'Email', value: 'info@alwthaqgroup.com' },
-  { icon: Clock3, label: 'Working Hours', value: 'Sun – Thu, 8:00 – 17:00' },
 ];
 
 export default function Footer() {
@@ -51,15 +44,68 @@ export default function Footer() {
         <div>
           <h2 className="text-xs font-semibold tracking-[0.2em] text-ink/50">CONTACT</h2>
           <div className="mt-6 flex flex-col gap-4">
-            {contactDetails.map(({ icon: Icon, label, value }) => (
-              <div key={label} className="flex items-start gap-3">
-                <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" strokeWidth={1.8} />
-                <div className="text-sm">
-                  <p className="text-xs text-ink/45">{label}</p>
-                  <p className="mt-0.5 text-ink/75">{value}</p>
-                </div>
+            {/* Phone 1 */}
+            <a href="tel:+971526684071" className="group flex items-start gap-3">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-primary transition-colors duration-300 group-hover:text-primary-600" strokeWidth={1.8} />
+              <div className="text-sm">
+                <p className="text-xs text-ink/45">Phone 1</p>
+                <p className="mt-0.5 text-ink/75 transition-colors duration-300 group-hover:text-primary">+971 52 668 4071</p>
               </div>
-            ))}
+            </a>
+
+            {/* Phone 2 */}
+            <a href="tel:+971555276288" className="group flex items-start gap-3">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-primary transition-colors duration-300 group-hover:text-primary-600" strokeWidth={1.8} />
+              <div className="text-sm">
+                <p className="text-xs text-ink/45">Phone 2</p>
+                <p className="mt-0.5 text-ink/75 transition-colors duration-300 group-hover:text-primary">+971 55 527 6288</p>
+              </div>
+            </a>
+
+            {/* Email */}
+            <a href="mailto:alwethaqgroup@gmail.com" className="group flex items-start gap-3">
+              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-primary transition-colors duration-300 group-hover:text-primary-600" strokeWidth={1.8} />
+              <div className="text-sm">
+                <p className="text-xs text-ink/45">Email</p>
+                <p className="mt-0.5 text-ink/75 transition-colors duration-300 group-hover:text-primary">alwethaqgroup@gmail.com</p>
+              </div>
+            </a>
+
+            {/* Website */}
+            <a href="https://www.alwethaqgroup.com" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3">
+              <Globe className="mt-0.5 h-4 w-4 shrink-0 text-primary transition-colors duration-300 group-hover:text-primary-600" strokeWidth={1.8} />
+              <div className="text-sm">
+                <p className="text-xs text-ink/45">Website</p>
+                <p className="mt-0.5 text-ink/75 transition-colors duration-300 group-hover:text-primary">www.alwethaqgroup.com</p>
+              </div>
+            </a>
+
+            {/* Address — plain text, not clickable */}
+            <div className="flex items-start gap-3">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" strokeWidth={1.8} />
+              <div className="text-sm">
+                <p className="text-xs text-ink/45">Address</p>
+                <p className="mt-0.5 text-ink/75">Al Nuaimiya 1, Ajman, UAE, P.O Box: 067049022</p>
+              </div>
+            </div>
+
+            {/* Manager — plain text */}
+            <div className="flex items-start gap-3">
+              <User className="mt-0.5 h-4 w-4 shrink-0 text-primary" strokeWidth={1.8} />
+              <div className="text-sm">
+                <p className="text-xs text-ink/45">Manager</p>
+                <p className="mt-0.5 text-ink/75">Emad Basheir (General Manager)</p>
+              </div>
+            </div>
+
+            {/* Working hours */}
+            <div className="flex items-start gap-3">
+              <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" strokeWidth={1.8} />
+              <div className="text-sm">
+                <p className="text-xs text-ink/45">Working Hours</p>
+                <p className="mt-0.5 text-ink/75">Sun – Thu, 8:00 – 17:00</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
