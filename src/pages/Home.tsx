@@ -427,7 +427,7 @@ export default function Home() {
               className="relative h-[420px]"
             >
               {/* Abstract gradient blob */}
-              <div className="absolute inset-0 overflow-hidden rounded-3xl bg-gradient-to-br from-secondary/20 via-primary/10 to-ink/5">
+              <div className="absolute inset-0 overflow-hidden rounded-3xl bg-[url('/images/about.jpg')] bg-cover bg-center">
                 <div className="absolute -left-10 top-10 h-48 w-48 rounded-full bg-secondary/30 blur-[60px]" />
                 <div className="absolute right-0 bottom-0 h-56 w-56 rounded-full bg-primary/20 blur-[70px]" />
                 <div className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/30" />
