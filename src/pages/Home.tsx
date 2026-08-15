@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { animate, motion, useInView } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { AnimatePresence, animate, motion, useInView } from 'framer-motion';
 import {
   ArrowRight,
   BookUser,
@@ -8,7 +9,9 @@ import {
   Car,
   CheckCircle2,
   Clock,
+  Minus,
   Phone,
+  Plus,
   ShieldCheck,
 } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
@@ -92,6 +95,25 @@ const features = [
     icon: ShieldCheck,
     title: 'Comprehensive Coverage',
     desc: 'From individuals to corporations, we cover every authority.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'How long does it take to set up a company in the UAE?',
+    a: 'The timeline varies depending on the jurisdiction (Mainland vs. Free Zone). Generally, it can take anywhere from 3 to 10 working days once all required documents are accurately submitted.',
+  },
+  {
+    q: 'Do I need a local sponsor to start a business?',
+    a: 'Recent legal updates allow 100% foreign ownership for most commercial and industrial activities in the UAE Mainland, eliminating the need for a local sponsor in many cases.',
+  },
+  {
+    q: 'Can you assist with Golden Visa applications?',
+    a: 'Yes, we handle the entire end-to-end process for Golden Visa applications for real estate investors, entrepreneurs, and highly skilled professionals.',
+  },
+  {
+    q: 'Are your services limited to Dubai?',
+    a: 'While we have a strong presence in Dubai, our services cover all Emirates across the UAE, handling federal and local municipal transactions.',
   },
 ];
 
@@ -202,10 +224,54 @@ function LeadFormCard() {
   );
 }
 
+/* ---------- FAQ accordion item ---------- */
+function FaqItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) {
+  return (
+    <motion.div
+      variants={blurReveal}
+      className={`overflow-hidden rounded-2xl border bg-white transition-colors duration-300 ${
+        isOpen ? 'border-[#1B753C]/30 shadow-[0_12px_30px_-12px_rgba(27,117,60,0.18)]' : 'border-black/5'
+      }`}
+    >
+      <button
+        onClick={onToggle}
+        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+      >
+        <span className="text-base font-semibold tracking-tight text-ink">{q}</span>
+        <motion.span
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3, ease }}
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10"
+        >
+          {isOpen ? (
+            <Minus className="h-4 w-4 text-primary" strokeWidth={2} />
+          ) : (
+            <Plus className="h-4 w-4 text-primary" strokeWidth={2} />
+          )}
+        </motion.span>
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease }}
+            className="overflow-hidden"
+          >
+            <p className="px-6 pb-6 text-sm leading-relaxed text-ink/55">{a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
 /* ---------- Page ---------- */
 export default function Home() {
   const statsRef = useRef<HTMLDivElement>(null);
   const statsInView = useInView(statsRef, { once: true, amount: 0.3 });
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
     <PageTransition>
@@ -254,24 +320,32 @@ export default function Home() {
                 transition={{ duration: 0.8, ease, delay: 0.3 }}
                 className="flex flex-col gap-4 sm:flex-row sm:items-center"
               >
-                <motion.a
-                  href="/contact"
+                <motion.div
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 rounded-full bg-secondary px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-secondary/25 transition-shadow duration-300 hover:bg-[#155f30] hover:shadow-[0_0_20px_rgba(179,32,37,0.4)]"
+                  className="inline-flex"
                 >
-                  Contact Us Now
-                  <ArrowRight className="h-4 w-4" />
-                </motion.a>
-                <motion.a
-                  href="tel:+97142388381"
+                  <Link
+                    to="/services"
+                    className="inline-flex items-center gap-2 rounded-full bg-secondary px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-secondary/25 transition-all duration-300 hover:bg-[#155f30] hover:shadow-[0_0_20px_rgba(27,117,60,0.4)]"
+                  >
+                    Explore Services
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </motion.div>
+                <motion.div
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:border-white/60 hover:bg-white/10"
+                  className="inline-flex"
                 >
-                  <Phone className="h-4 w-4" />
-                  +971 4 238 8381
-                </motion.a>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:border-white/60 hover:bg-white/10"
+                  >
+                    <Phone className="h-4 w-4" />
+                    Contact Us Now
+                  </Link>
+                </motion.div>
               </motion.div>
             </div>
 
@@ -302,6 +376,93 @@ export default function Home() {
             />
           ))}
         </motion.div>
+      </section>
+
+      {/* ===== About Us Teaser ===== */}
+      <section className="bg-white py-24 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+            {/* Left — text */}
+            <motion.div
+              initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 1, ease }}
+            >
+              <span className="mb-4 inline-block text-sm font-semibold tracking-[0.2em] text-primary">
+                ABOUT US
+              </span>
+              <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+                Your Trusted Partner for Government Transactions
+              </h2>
+              <p className="mt-6 max-w-lg text-base leading-relaxed text-ink/55">
+                With years of expertise in the UAE, Al Wthaq Group simplifies complex governmental
+                procedures. Whether you are an individual seeking residency or a corporation
+                expanding in Dubai, our dedicated consultants ensure seamless, error-free, and
+                timely processing of all your official documents.
+              </p>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                className="mt-8 inline-flex"
+              >
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-7 py-3.5 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-white"
+                >
+                  Learn More About Us
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* Right — abstract shape with glassmorphism card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 1, ease, delay: 0.15 }}
+              className="relative h-[420px]"
+            >
+              {/* Abstract gradient blob */}
+              <div className="absolute inset-0 overflow-hidden rounded-3xl bg-gradient-to-br from-secondary/20 via-primary/10 to-ink/5">
+                <div className="absolute -left-10 top-10 h-48 w-48 rounded-full bg-secondary/30 blur-[60px]" />
+                <div className="absolute right-0 bottom-0 h-56 w-56 rounded-full bg-primary/20 blur-[70px]" />
+                <div className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/30" />
+                <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" />
+              </div>
+
+              {/* Overlapping glass card */}
+              <div className="absolute -bottom-6 left-1/2 w-[85%] -translate-x-1/2 rounded-2xl border border-white/40 bg-white/60 p-6 shadow-xl backdrop-blur-md">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary/15">
+                    <ShieldCheck className="h-6 w-6 text-secondary" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-ink">Trusted by 2,500+ Clients</p>
+                    <p className="mt-0.5 text-xs text-ink/50">
+                      Across all Emirates in the UAE
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-5 grid grid-cols-3 gap-4">
+                  <div>
+                    <p className="text-2xl font-bold text-primary">12+</p>
+                    <p className="mt-1 text-xs text-ink/50">Years</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-primary">25+</p>
+                    <p className="mt-1 text-xs text-ink/50">Experts</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-primary">97%</p>
+                    <p className="mt-1 text-xs text-ink/50">Satisfaction</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* ===== Core Services Grid ===== */}
@@ -335,6 +496,28 @@ export default function Home() {
                 desc={service.desc}
               />
             ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 1, ease }}
+            className="mt-14 text-center"
+          >
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex"
+            >
+              <Link
+                to="/services"
+                className="inline-flex items-center gap-2 rounded-full bg-secondary px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-secondary/25 transition-all duration-300 hover:bg-[#155f30] hover:shadow-[0_0_20px_rgba(27,117,60,0.4)]"
+              >
+                View All Services
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -383,6 +566,42 @@ export default function Home() {
             })}
           </div>
         </motion.div>
+      </section>
+
+      {/* ===== FAQ ===== */}
+      <section className="bg-off-white py-24 lg:py-28">
+        <div className="mx-auto max-w-3xl px-6 lg:px-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 1, ease }}
+            className="text-center"
+          >
+            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+              Frequently Asked Questions
+            </h2>
+            <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-primary" />
+          </motion.div>
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-100px' }}
+            className="mt-14 flex flex-col gap-4"
+          >
+            {faqs.map((faq, i) => (
+              <FaqItem
+                key={faq.q}
+                q={faq.q}
+                a={faq.a}
+                isOpen={openFaq === i}
+                onToggle={() => setOpenFaq(openFaq === i ? null : i)}
+              />
+            ))}
+          </motion.div>
+        </div>
       </section>
     </PageTransition>
   );
