@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Link, NavLink } from 'react-router-dom';
 
 const links = [
@@ -16,7 +15,7 @@ export default function Navbar() {
           <img
             src="/logo.png"
             alt="Al Wthaq Group"
-            className="h-14 w-auto object-contain md:h-16"
+            className="h-16 w-auto object-contain scale-110 origin-center md:h-20 md:scale-110"
           />
         </Link>
 
@@ -27,26 +26,13 @@ export default function Navbar() {
                 to={link.to}
                 end={link.to === '/'}
                 className={({ isActive }) =>
-                  `relative text-lg font-medium tracking-wide transition-colors duration-300 ${
+                  `group relative inline-block text-lg font-medium tracking-wide transition-colors duration-300 ${
                     isActive ? 'text-primary' : 'text-ink/70 hover:text-primary'
                   }`
                 }
               >
-                {({ isActive }) => (
-                  <motion.span
-                    whileHover={{ y: -2 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                    className="inline-block"
-                  >
-                    {link.label}
-                    {isActive && (
-                      <motion.span
-                        layoutId="nav-underline"
-                        className="absolute -bottom-2 left-0 h-0.5 w-full rounded-full bg-primary"
-                      />
-                    )}
-                  </motion.span>
-                )}
+                {link.label}
+                <span className="absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-[#B32025] opacity-0 transition-all duration-300 ease-out group-hover:scale-x-100 group-hover:opacity-100" />
               </NavLink>
             </li>
           ))}
