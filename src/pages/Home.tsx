@@ -167,14 +167,15 @@ export default function Home() {
   return (
     <PageTransition>
       {/* ===== Hero ===== */}
-      <section className="relative flex min-h-screen items-center overflow-hidden bg-[url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80')] bg-cover bg-center">
+      <section className="relative w-full min-h-screen overflow-hidden bg-[url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80')] bg-cover bg-center bg-no-repeat">
         {/* dark overlay */}
         <div className="absolute inset-0 bg-[#111111]/80" />
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-24">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-            {/* Left column — text */}
-            <div>
+        <div className="relative z-10 flex min-h-screen items-center">
+          <div className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-12">
+            <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+              {/* Left column — text */}
+              <div>
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -228,8 +229,9 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Right column — lead form */}
-            <LeadFormCard />
+              {/* Right column — lead form */}
+              <LeadFormCard />
+            </div>
           </div>
         </div>
       </section>

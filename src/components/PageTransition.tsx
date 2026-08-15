@@ -22,7 +22,7 @@ export default function PageTransition({ children }: { children: ReactNode }) {
       initial="initial"
       animate="enter"
       exit="exit"
-      className="flex flex-1 flex-col items-center justify-center"
+      className="flex flex-1 flex-col w-full"
     >
       {children}
     </motion.div>
