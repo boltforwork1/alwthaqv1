@@ -31,9 +31,14 @@ function useCountUp(target: number, inView: boolean, duration = 2) {
 /* ---------- Shared animation helpers ---------- */
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease } },
+const blurReveal = {
+  hidden: { opacity: 0, y: 30, filter: 'blur(12px)' },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 1, ease },
+  },
 };
 
 const stagger = {
@@ -105,7 +110,10 @@ function StatItem({
   const count = useCountUp(value, inView);
   const display = value >= 1000 ? Math.round(count).toLocaleString() : Math.round(count);
   return (
-    <div className="text-center">
+    <motion.div
+      variants={blurReveal}
+      className="text-center"
+    >
       <div className="min-w-[150px] text-4xl font-bold tabular-nums tracking-tight text-secondary sm:text-5xl lg:text-6xl">
         {display}
         {suffix}
@@ -113,7 +121,40 @@ function StatItem({
       <div className="mt-3 text-sm font-medium tracking-wide text-white/60 sm:text-base">
         {label}
       </div>
-    </div>
+    </motion.div>
+  );
+}
+
+/* ---------- Service card ---------- */
+function ServiceCard({
+  icon: Icon,
+  title,
+  desc,
+}: {
+  icon: typeof Building2;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <motion.div
+      variants={blurReveal}
+      className="group rounded-2xl border border-black/5 bg-white/70 p-8 shadow-sm backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-2 hover:border-[#1B753C]/30 hover:shadow-[0_20px_40px_-15px_rgba(27,117,60,0.15)]"
+    >
+      <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-colors duration-300 group-hover:bg-primary">
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: 'spring', stiffness: 300 }}
+        >
+          <Icon className="h-7 w-7 text-primary transition-colors duration-300 group-hover:text-white" strokeWidth={1.5} />
+        </motion.div>
+      </div>
+      <h3 className="mt-6 text-lg font-semibold tracking-tight text-ink">
+        {title}
+      </h3>
+      <p className="mt-3 text-sm leading-relaxed text-ink/55">
+        {desc}
+      </p>
+    </motion.div>
   );
 }
 
@@ -121,9 +162,9 @@ function StatItem({
 function LeadFormCard() {
   return (
     <motion.form
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease, delay: 0.35 }}
+      initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
+      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      transition={{ duration: 1, ease, delay: 0.35 }}
       onSubmit={(e) => e.preventDefault()}
       className="rounded-2xl border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-md"
     >
@@ -148,13 +189,15 @@ function LeadFormCard() {
         />
       </div>
 
-      <button
+      <motion.button
         type="submit"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.97 }}
         className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-secondary px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#155f30]"
       >
         Request A Free Quote
         <ArrowRight className="h-4 w-4" />
-      </button>
+      </motion.button>
     </motion.form>
   );
 }
@@ -177,9 +220,8 @@ export default function Home() {
               {/* Left column — text */}
               <div>
               <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease }}
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
                 className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm text-white"
               >
                 <span className="h-2 w-2 rounded-full bg-green-400" />
@@ -212,20 +254,24 @@ export default function Home() {
                 transition={{ duration: 0.8, ease, delay: 0.3 }}
                 className="flex flex-col gap-4 sm:flex-row sm:items-center"
               >
-                <a
+                <motion.a
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-secondary px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-secondary/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#155f30]"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-2 rounded-full bg-secondary px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-secondary/25 transition-shadow duration-300 hover:bg-[#155f30] hover:shadow-[0_0_20px_rgba(179,32,37,0.4)]"
                 >
                   Contact Us Now
                   <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
+                </motion.a>
+                <motion.a
                   href="tel:+97142388381"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:border-white/60 hover:bg-white/10"
                 >
                   <Phone className="h-4 w-4" />
                   +971 4 238 8381
-                </a>
+                </motion.a>
               </motion.div>
             </div>
 
@@ -238,8 +284,12 @@ export default function Home() {
 
       {/* ===== Statistics (full-width dark band) ===== */}
       <section className="w-full bg-ink py-20 lg:py-24">
-        <div
+        <motion.div
           ref={statsRef}
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-100px' }}
           className="mx-auto grid max-w-7xl grid-cols-2 gap-12 px-6 lg:grid-cols-4 lg:gap-8 lg:px-10"
         >
           {stats.map((stat) => (
@@ -251,17 +301,17 @@ export default function Home() {
               inView={statsInView}
             />
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* ===== Core Services Grid ===== */}
       <section className="bg-off-white py-24 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.8, ease }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 1, ease }}
             className="text-center"
           >
             <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
@@ -274,31 +324,17 @@ export default function Home() {
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, margin: '-100px' }}
             className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
           >
-            {services.map((service) => {
-              const Icon = service.icon;
-              return (
-                <motion.div
-                  key={service.title}
-                  variants={fadeUp}
-                  whileHover={{ y: -8 }}
-                  transition={{ duration: 0.3, ease }}
-                  className="group rounded-2xl border border-black/5 bg-white/70 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-primary/20 hover:shadow-xl hover:shadow-black/5"
-                >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-colors duration-300 group-hover:bg-primary">
-                    <Icon className="h-7 w-7 text-primary transition-colors duration-300 group-hover:text-white" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="mt-6 text-lg font-semibold tracking-tight text-ink">
-                    {service.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink/55">
-                    {service.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
+            {services.map((service) => (
+              <ServiceCard
+                key={service.title}
+                icon={service.icon}
+                title={service.title}
+                desc={service.desc}
+              />
+            ))}
           </motion.div>
         </div>
       </section>
@@ -309,11 +345,11 @@ export default function Home() {
           variants={stagger}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, margin: '-100px' }}
           className="mx-auto max-w-6xl px-6 lg:px-10"
         >
           <motion.div
-            variants={fadeUp}
+            variants={blurReveal}
             className="mb-14 text-center"
           >
             <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
@@ -330,7 +366,7 @@ export default function Home() {
               return (
                 <motion.div
                   key={feature.title}
-                  variants={fadeUp}
+                  variants={blurReveal}
                   className="flex flex-col items-center text-center"
                 >
                   <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary/10">
