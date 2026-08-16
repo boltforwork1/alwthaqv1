@@ -36,11 +36,11 @@ function ValueCard({ icon: Icon, title, desc }: { icon: typeof Zap; title: strin
       variants={blurReveal}
       className="group flex flex-col items-center text-center"
     >
-      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 transition-colors duration-300 group-hover:bg-primary">
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 transition-colors duration-300 group-hover:bg-primary">
         <Icon className="h-8 w-8 text-primary transition-colors duration-300 group-hover:text-white" strokeWidth={1.5} />
       </div>
-      <h3 className="mt-6 text-base font-semibold tracking-tight text-ink">{title}</h3>
-      <p className="mt-2 max-w-[12rem] text-sm leading-relaxed text-ink/55">{desc}</p>
+      <h3 className="mt-6 text-base font-semibold tracking-tight text-white">{title}</h3>
+      <p className="mt-2 max-w-[12rem] text-sm leading-relaxed text-white/60">{desc}</p>
     </motion.div>
   );
 }
@@ -50,7 +50,8 @@ export default function About() {
   return (
     <PageTransition>
       {/* ===== Hero Header ===== */}
-      <section className="relative w-full overflow-hidden bg-ink py-24 lg:py-28">
+      <section className="relative w-full min-h-[40vh] overflow-hidden bg-[url('/images/about-header-bg.jpg')] bg-cover bg-center bg-no-repeat py-24 lg:py-28">
+        <div className="absolute inset-0 bg-[#111111]/70" />
         <div className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-[#1B753C]/25 blur-[120px]" />
         <div className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-[#B32025]/20 blur-[130px]" />
 
@@ -97,25 +98,47 @@ export default function About() {
               </p>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 1, ease, delay: 0.15 }}
-              className="relative"
-            >
-              <div className="overflow-hidden rounded-2xl shadow-xl">
+            <div className="relative h-[480px]">
+              {/* Tall image */}
+              <motion.div
+                initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 1, ease, delay: 0.15 }}
+                className="absolute left-0 top-0 h-full w-[65%] overflow-hidden rounded-2xl shadow-xl"
+              >
                 <img
-                  src="/images/about.jpg"
-                  alt="Modern Dubai office"
-                  className="h-[400px] w-full object-cover"
+                  src="/images/about-1.jpg"
+                  alt="Al Wthaq Group office"
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-110"
                 />
-              </div>
-              <div className="absolute -bottom-6 left-6 rounded-2xl border border-white/40 bg-white/70 px-6 py-4 shadow-xl backdrop-blur-md">
+              </motion.div>
+              {/* Square image overlapping */}
+              <motion.div
+                initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 1, ease, delay: 0.3 }}
+                className="absolute bottom-0 right-0 h-[55%] w-[50%] overflow-hidden rounded-2xl border-4 border-white shadow-xl"
+              >
+                <img
+                  src="/images/about-2.jpg"
+                  alt="Consultants at work"
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-110"
+                />
+              </motion.div>
+              {/* Stats badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 1, ease, delay: 0.45 }}
+                className="absolute -top-4 right-8 rounded-2xl border border-white/40 bg-white/70 px-6 py-4 shadow-xl backdrop-blur-md"
+              >
                 <p className="text-2xl font-bold text-primary">12+</p>
                 <p className="mt-0.5 text-xs font-medium text-ink/60">Years of Excellence</p>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -162,8 +185,9 @@ export default function About() {
       </section>
 
       {/* ===== Core Values ===== */}
-      <section className="bg-white py-24 lg:py-28">
-        <div className="mx-auto max-w-6xl px-6 lg:px-10">
+      <section className="relative w-full overflow-hidden bg-[url('/images/values-bg.jpg')] bg-cover bg-center bg-no-repeat py-24 lg:py-28">
+        <div className="absolute inset-0 bg-[#111111]/85" />
+        <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-10">
           <motion.div
             initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -171,7 +195,7 @@ export default function About() {
             transition={{ duration: 1, ease }}
             className="text-center"
           >
-            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Why Choose Us
             </h2>
             <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-primary" />

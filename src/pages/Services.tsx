@@ -37,6 +37,7 @@ type ServiceItem = {
   title: string;
   desc: string;
   details: string[];
+  image: string;
 };
 
 const mainServices: ServiceItem[] = [
@@ -44,6 +45,7 @@ const mainServices: ServiceItem[] = [
     icon: Building2,
     title: 'Company Setup & Licensing',
     desc: 'Trade name reservation, commercial license issuance & renewal, contract amendments, and company liquidation.',
+    image: '/images/service-setup.jpg',
     details: [
       'Trade Name Reservation & Initial Approvals',
       'Commercial License Issuance & Annual Renewal',
@@ -55,6 +57,7 @@ const mainServices: ServiceItem[] = [
     icon: IdCard,
     title: 'Visas & Immigration',
     desc: 'Employee & family residency issuance, visit visas, golden/green visas, and sponsorship transfers.',
+    image: '/images/service-visa.jpg',
     details: [
       'Issuance & Renewal of Employee/Family Residencies',
       'Work Visas & Tourist/Visit Visas processing',
@@ -66,6 +69,7 @@ const mainServices: ServiceItem[] = [
     icon: Briefcase,
     title: 'Ministry of Human Resources',
     desc: 'Establishment card opening, labor contract processing, and salary/profession updates.',
+    image: '/images/service-mohre.jpg',
     details: [
       'Opening Establishment Cards & Company Registration',
       'Issuing & Renewing Labor Contracts/Permits',
@@ -77,6 +81,7 @@ const mainServices: ServiceItem[] = [
     icon: Landmark,
     title: 'Municipalities & Approvals',
     desc: 'Signage permits, structural modifications, health certificates, and civil defense approvals.',
+    image: '/images/service-municipality.jpg',
     details: [
       'Shop & Building Permits (Signage, Structural Modifications)',
       'Health Certificates for the Food & Restaurant Sector',
@@ -87,6 +92,7 @@ const mainServices: ServiceItem[] = [
     icon: Car,
     title: 'Traffic & Vehicle Services',
     desc: 'Vehicle ownership transfer, registration renewal, driving licenses, and traffic fines settlement.',
+    image: '/images/service-traffic.jpg',
     details: [
       'Transfer of Vehicle Ownership & Plate Issuance',
       'Renewal of Driving & Vehicle Licenses',
@@ -98,6 +104,7 @@ const mainServices: ServiceItem[] = [
     icon: FileSignature,
     title: 'Judicial & Notarization',
     desc: 'Attestation of certificates, agency notarizations, commercial and residential lease agreements.',
+    image: '/images/service-notary.jpg',
     details: [
       'Attestation of Agencies & Certificates (Ministry of Foreign Affairs, Notary Public)',
       'Notarization of Contracts (Commercial, Residential, Company MOAs).',
@@ -124,38 +131,50 @@ function ServiceCard({
   icon: Icon,
   title,
   desc,
+  image,
   onView,
 }: {
   icon: typeof Building2;
   title: string;
   desc: string;
+  image: string;
   onView: () => void;
 }) {
   return (
     <motion.div
       variants={blurReveal}
-      className="group flex flex-col rounded-2xl border border-black/5 bg-white p-8 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:border-[#1B753C]/30 hover:shadow-[0_20px_40px_-15px_rgba(27,117,60,0.15)]"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:border-[#1B753C]/30 hover:shadow-[0_20px_40px_-15px_rgba(27,117,60,0.15)]"
     >
-      <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-colors duration-300 group-hover:bg-primary">
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          transition={{ type: 'spring', stiffness: 300 }}
-        >
-          <Icon
-            className="h-7 w-7 text-primary transition-colors duration-300 group-hover:text-white"
-            strokeWidth={1.5}
-          />
-        </motion.div>
+      <div className="relative h-44 overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
       </div>
-      <h3 className="mt-6 text-lg font-semibold tracking-tight text-ink">{title}</h3>
-      <p className="mt-3 text-sm leading-relaxed text-ink/55">{desc}</p>
-      <button
-        onClick={onView}
-        className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-ink/50 transition-colors duration-300 hover:text-primary"
-      >
-        View Details
-        <ArrowRight className="h-4 w-4" />
-      </button>
+      <div className="flex flex-1 flex-col p-8">
+        <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-colors duration-300 group-hover:bg-primary">
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+          >
+            <Icon
+              className="h-7 w-7 text-primary transition-colors duration-300 group-hover:text-white"
+              strokeWidth={1.5}
+            />
+          </motion.div>
+        </div>
+        <h3 className="mt-6 text-lg font-semibold tracking-tight text-ink">{title}</h3>
+        <p className="mt-3 text-sm leading-relaxed text-ink/55">{desc}</p>
+        <button
+          onClick={onView}
+          className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-ink/50 transition-colors duration-300 hover:text-primary"
+        >
+          View Details
+          <ArrowRight className="h-4 w-4" />
+        </button>
+      </div>
     </motion.div>
   );
 }
@@ -223,7 +242,8 @@ export default function Services() {
   return (
     <PageTransition>
       {/* ===== Hero Header ===== */}
-      <section className="relative w-full overflow-hidden bg-ink py-24 lg:py-28">
+      <section className="relative w-full min-h-[40vh] overflow-hidden bg-[url('/images/services-header-bg.jpg')] bg-cover bg-center bg-no-repeat py-24 lg:py-28">
+        <div className="absolute inset-0 bg-[#111111]/70" />
         {/* glowing orbs */}
         <div className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-[#1B753C]/25 blur-[120px]" />
         <div className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-[#B32025]/20 blur-[130px]" />
@@ -262,6 +282,7 @@ export default function Services() {
                 icon={service.icon}
                 title={service.title}
                 desc={service.desc}
+                image={service.image}
                 onView={() => setSelectedService(service)}
               />
             ))}

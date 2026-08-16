@@ -1,19 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, animate, motion, useInView } from 'framer-motion';
-import {
-  ArrowRight,
-  BookUser,
-  Briefcase,
-  Building2,
-  Car,
-  CheckCircle2,
-  Clock,
-  Minus,
-  Phone,
-  Plus,
-  ShieldCheck,
-} from 'lucide-react';
+import { ArrowRight, BookUser, Briefcase, Building2, Car, CircleCheck as CheckCircle2, Clock, Minus, Phone, Plus, ShieldCheck } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
 
 /* ---------- Count-up hook ---------- */
@@ -426,12 +414,13 @@ export default function Home() {
               transition={{ duration: 1, ease, delay: 0.15 }}
               className="relative h-[420px]"
             >
-              {/* Abstract gradient blob */}
-              <div className="absolute inset-0 overflow-hidden rounded-3xl bg-[url('/images/about.jpg')] bg-cover bg-center">
-                <div className="absolute -left-10 top-10 h-48 w-48 rounded-full bg-secondary/30 blur-[60px]" />
-                <div className="absolute right-0 bottom-0 h-56 w-56 rounded-full bg-primary/20 blur-[70px]" />
-                <div className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/30" />
-                <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" />
+              {/* Large framed image */}
+              <div className="absolute inset-0 overflow-hidden rounded-2xl shadow-xl">
+                <img
+                  src="/images/home-about.jpg"
+                  alt="Al Wthaq Group consultants at work"
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-110"
+                />
               </div>
 
               {/* Overlapping glass card */}
