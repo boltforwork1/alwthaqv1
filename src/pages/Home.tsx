@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AnimatePresence, animate, motion, useInView } from 'framer-motion';
 import { ArrowRight, BookUser, Briefcase, Building2, Car, CircleCheck as CheckCircle2, Clock, Minus, Phone, Plus, ShieldCheck } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
+import { useLanguage } from '@/context/LanguageContext';
 
 /* ---------- Count-up hook ---------- */
 function useCountUp(target: number, inView: boolean, duration = 2) {
@@ -37,73 +38,9 @@ const stagger = {
   show: { transition: { staggerChildren: 0.15 } },
 };
 
-/* ---------- Data ---------- */
-const stats = [
-  { value: 2500, suffix: '+', label: 'Clients Helped' },
-  { value: 12, suffix: '+', label: 'Years Experience' },
-  { value: 25, suffix: '+', label: 'Expert Consultants' },
-  { value: 97, suffix: '%', label: 'Client Satisfaction' },
-];
-
-const services = [
-  {
-    icon: Building2,
-    title: 'Company Setup & Licensing',
-    desc: 'Booking trade names, issuing licenses, and amending commercial contracts.',
-  },
-  {
-    icon: BookUser,
-    title: 'Visas & Residency',
-    desc: 'Residency issuance, work visas, and golden visa applications.',
-  },
-  {
-    icon: Briefcase,
-    title: 'Ministry of Human Resources',
-    desc: 'Establishment cards, labor contracts, and employee data updates.',
-  },
-  {
-    icon: Car,
-    title: 'Traffic & Municipalities',
-    desc: 'Vehicle ownership transfer, driving licenses, and health permits.',
-  },
-];
-
-const features = [
-  {
-    icon: CheckCircle2,
-    title: 'High Accuracy & Reliability',
-    desc: 'Every transaction is handled with meticulous attention to detail.',
-  },
-  {
-    icon: Clock,
-    title: 'Time & Effort Saving',
-    desc: 'We handle the queues and paperwork so you never have to.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Comprehensive Coverage',
-    desc: 'From individuals to corporations, we cover every authority.',
-  },
-];
-
-const faqs = [
-  {
-    q: 'How long does it take to set up a company in the UAE?',
-    a: 'The timeline varies depending on the jurisdiction (Mainland vs. Free Zone). Generally, it can take anywhere from 3 to 10 working days once all required documents are accurately submitted.',
-  },
-  {
-    q: 'Do I need a local sponsor to start a business?',
-    a: 'Recent legal updates allow 100% foreign ownership for most commercial and industrial activities in the UAE Mainland, eliminating the need for a local sponsor in many cases.',
-  },
-  {
-    q: 'Can you assist with Golden Visa applications?',
-    a: 'Yes, we handle the entire end-to-end process for Golden Visa applications for real estate investors, entrepreneurs, and highly skilled professionals.',
-  },
-  {
-    q: 'Are your services limited to Dubai?',
-    a: 'While we have a strong presence in Dubai, our services cover all Emirates across the UAE, handling federal and local municipal transactions.',
-  },
-];
+/* ---------- Service icons (kept in code, titles come from translations) ---------- */
+const serviceIcons = [Building2, BookUser, Briefcase, Car];
+const featureIcons = [CheckCircle2, Clock, ShieldCheck];
 
 /* ---------- Stat item ---------- */
 function StatItem({
@@ -120,10 +57,7 @@ function StatItem({
   const count = useCountUp(value, inView);
   const display = value >= 1000 ? Math.round(count).toLocaleString() : Math.round(count);
   return (
-    <motion.div
-      variants={blurReveal}
-      className="text-center"
-    >
+    <motion.div variants={blurReveal} className="text-center">
       <div className="min-w-[120px] text-3xl font-bold tabular-nums tracking-tight text-secondary md:min-w-[150px] md:text-4xl sm:text-5xl lg:text-6xl">
         {display}
         {suffix}
@@ -151,25 +85,19 @@ function ServiceCard({
       className="group rounded-2xl border border-black/5 bg-white/70 p-6 shadow-sm backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-2 hover:border-[#1B753C]/30 hover:shadow-[0_20px_40px_-15px_rgba(27,117,60,0.15)] md:p-8"
     >
       <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-colors duration-300 group-hover:bg-primary">
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          transition={{ type: 'spring', stiffness: 300 }}
-        >
+        <motion.div whileHover={{ scale: 1.1 }} transition={{ type: 'spring', stiffness: 300 }}>
           <Icon className="h-7 w-7 text-primary transition-colors duration-300 group-hover:text-white" strokeWidth={1.5} />
         </motion.div>
       </div>
-      <h3 className="mt-6 text-lg font-semibold tracking-tight text-ink">
-        {title}
-      </h3>
-      <p className="mt-3 text-sm leading-relaxed text-ink/55">
-        {desc}
-      </p>
+      <h3 className="mt-6 text-lg font-semibold tracking-tight text-ink">{title}</h3>
+      <p className="mt-3 text-sm leading-relaxed text-ink/55">{desc}</p>
     </motion.div>
   );
 }
 
 /* ---------- Lead form card ---------- */
 function LeadFormCard() {
+  const { t } = useLanguage();
   return (
     <motion.form
       initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
@@ -178,11 +106,11 @@ function LeadFormCard() {
       onSubmit={(e) => e.preventDefault()}
       className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-md md:p-8"
     >
-      <h3 className="text-xl font-bold text-white md:text-2xl">Request a Free Quote</h3>
-      <p className="mb-6 mt-1 text-gray-300">Tell us a little about your business goals.</p>
+      <h3 className="text-xl font-bold text-white md:text-2xl">{t.home.quoteTitle}</h3>
+      <p className="mb-6 mt-1 text-gray-300">{t.home.quoteDesc}</p>
 
       <div className="mb-4">
-        <label className="mb-2 block text-sm text-gray-200">Full Name</label>
+        <label className="mb-2 block text-sm text-gray-200">{t.home.quoteName}</label>
         <input
           type="text"
           placeholder="John Doe"
@@ -191,7 +119,7 @@ function LeadFormCard() {
       </div>
 
       <div className="mb-6">
-        <label className="mb-2 block text-sm text-gray-200">Email / Phone</label>
+        <label className="mb-2 block text-sm text-gray-200">{t.home.quoteContact}</label>
         <input
           type="text"
           placeholder="you@example.com"
@@ -205,8 +133,8 @@ function LeadFormCard() {
         whileTap={{ scale: 0.97 }}
         className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-secondary px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#155f30]"
       >
-        Request A Free Quote
-        <ArrowRight className="h-4 w-4" />
+        {t.home.quoteSubmit}
+        <ArrowRight className="h-4 w-4 rtl:rotate-180" />
       </motion.button>
     </motion.form>
   );
@@ -221,10 +149,7 @@ function FaqItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
         isOpen ? 'border-[#1B753C]/30 shadow-[0_12px_30px_-12px_rgba(27,117,60,0.18)]' : 'border-black/5'
       }`}
     >
-      <button
-        onClick={onToggle}
-        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
-      >
+      <button onClick={onToggle} className="flex w-full items-center justify-between gap-4 px-6 py-5 text-start">
         <span className="text-base font-semibold tracking-tight text-ink">{q}</span>
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
@@ -257,15 +182,22 @@ function FaqItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
 
 /* ---------- Page ---------- */
 export default function Home() {
+  const { t } = useLanguage();
   const statsRef = useRef<HTMLDivElement>(null);
   const statsInView = useInView(statsRef, { once: true, amount: 0.3 });
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  const stats = [
+    { value: 2500, suffix: '+', label: t.home.stats.clients },
+    { value: 12, suffix: '+', label: t.home.stats.exp },
+    { value: 25, suffix: '+', label: t.home.stats.experts },
+    { value: 97, suffix: '%', label: t.home.stats.satisfaction },
+  ];
 
   return (
     <PageTransition>
       {/* ===== Hero ===== */}
       <section className="relative w-full min-h-screen overflow-hidden bg-[url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80')] bg-cover bg-center bg-no-repeat">
-        {/* dark overlay */}
         <div className="absolute inset-0 bg-[#111111]/80" />
 
         <div className="relative z-10 flex min-h-screen items-center">
@@ -273,71 +205,60 @@ export default function Home() {
             <div className="grid grid-cols-1 items-center gap-10 md:gap-12 lg:grid-cols-2">
               {/* Left column — text */}
               <div>
-              <span
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm text-white"
-              >
-                <motion.span
-                  animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8], filter: ['blur(2px)', 'blur(0px)', 'blur(2px)'] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                  className="h-2 w-2 rounded-full bg-[#2EE6A6]"
-                />
-                Your Trusted Government Services Partner
-              </span>
+                <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm text-white">
+                  <motion.span
+                    animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8], filter: ['blur(2px)', 'blur(0px)', 'blur(2px)'] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                    className="h-2 w-2 rounded-full bg-[#2EE6A6]"
+                  />
+                  {t.home.badge}
+                </span>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease, delay: 0.1 }}
-                className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
-              >
-                Business Setup &amp;{' '}
-                <span className="text-secondary">Government Transactions</span> in UAE
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease, delay: 0.2 }}
-                className="mb-8 mt-6 max-w-xl text-base leading-relaxed text-gray-300 md:text-lg"
-              >
-                Our comprehensive services cover all individual and corporate needs with
-                official authorities. We save your time and effort while avoiding common errors.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease, delay: 0.3 }}
-                className="flex flex-col gap-4 sm:flex-row sm:items-center"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="inline-flex"
+                <motion.h1
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease, delay: 0.1 }}
+                  className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
                 >
-                  <Link
-                    to="/services"
-                    className="inline-flex items-center gap-2 rounded-full bg-secondary px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-secondary/25 transition-all duration-300 hover:bg-[#155f30] hover:shadow-[0_0_20px_rgba(27,117,60,0.4)]"
-                  >
-                    Explore Services
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="inline-flex"
+                  {t.home.heroTitle.split(' ').slice(0, -3).join(' ')}{' '}
+                  <span className="text-secondary">{t.home.heroTitle.split(' ').slice(-3).join(' ')}</span>
+                </motion.h1>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease, delay: 0.2 }}
+                  className="mb-8 mt-6 max-w-xl text-base leading-relaxed text-gray-300 md:text-lg"
                 >
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:border-white/60 hover:bg-white/10"
-                  >
-                    <Phone className="h-4 w-4" />
-                    Contact Us Now
-                  </Link>
+                  {t.home.heroDesc}
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease, delay: 0.3 }}
+                  className="flex flex-col gap-4 sm:flex-row sm:items-center"
+                >
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} className="inline-flex">
+                    <Link
+                      to="/services"
+                      className="inline-flex items-center gap-2 rounded-full bg-secondary px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-secondary/25 transition-all duration-300 hover:bg-[#155f30] hover:shadow-[0_0_20px_rgba(27,117,60,0.4)]"
+                    >
+                      {t.home.exploreBtn}
+                      <ArrowRight className="h-4 w-4 rtl:rotate-180" />
+                    </Link>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} className="inline-flex">
+                    <Link
+                      to="/contact"
+                      className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:border-white/60 hover:bg-white/10"
+                    >
+                      <Phone className="h-4 w-4" />
+                      {t.home.contactBtn}
+                    </Link>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            </div>
+              </div>
 
               {/* Right column — lead form */}
               <LeadFormCard />
@@ -346,7 +267,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== Statistics (full-width dark band) ===== */}
+      {/* ===== Statistics ===== */}
       <section className="w-full bg-ink py-12 md:py-20 lg:py-24">
         <motion.div
           ref={statsRef}
@@ -357,13 +278,7 @@ export default function Home() {
           className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 md:gap-12 md:px-8 lg:grid-cols-4 lg:gap-8 lg:px-10"
         >
           {stats.map((stat) => (
-            <StatItem
-              key={stat.label}
-              value={stat.value}
-              suffix={stat.suffix}
-              label={stat.label}
-              inView={statsInView}
-            />
+            <StatItem key={stat.label} value={stat.value} suffix={stat.suffix} label={stat.label} inView={statsInView} />
           ))}
         </motion.div>
       </section>
@@ -372,7 +287,6 @@ export default function Home() {
       <section className="bg-white py-12 md:py-24 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
           <div className="grid grid-cols-1 items-center gap-10 md:gap-16 lg:grid-cols-2">
-            {/* Left — text */}
             <motion.div
               initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -380,33 +294,25 @@ export default function Home() {
               transition={{ duration: 1, ease }}
             >
               <span className="mb-4 inline-block text-sm font-semibold tracking-[0.2em] text-primary">
-                ABOUT US
+                {t.home.aboutBadge}
               </span>
               <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
-                Your Trusted Partner for Government Transactions
+                {t.home.aboutTitle}
               </h2>
               <p className="mt-6 max-w-lg text-sm leading-relaxed text-ink/55 md:text-base">
-                With years of expertise in the UAE, Al Wthaq Group simplifies complex governmental
-                procedures. Whether you are an individual seeking residency or a corporation
-                expanding in Dubai, our dedicated consultants ensure seamless, error-free, and
-                timely processing of all your official documents.
+                {t.home.aboutDesc}
               </p>
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.97 }}
-                className="mt-8 inline-flex"
-              >
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} className="mt-8 inline-flex">
                 <Link
                   to="/about"
                   className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-7 py-3.5 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-white"
                 >
-                  Learn More About Us
-                  <ArrowRight className="h-4 w-4" />
+                  {t.home.aboutBtn}
+                  <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                 </Link>
               </motion.div>
             </motion.div>
 
-            {/* Right — abstract shape with glassmorphism card */}
             <motion.div
               initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -414,7 +320,6 @@ export default function Home() {
               transition={{ duration: 1, ease, delay: 0.15 }}
               className="relative h-[320px] md:h-[420px]"
             >
-              {/* Large framed image */}
               <div className="absolute inset-0 overflow-hidden rounded-2xl shadow-xl">
                 <img
                   src="/images/home-about.jpg"
@@ -423,31 +328,28 @@ export default function Home() {
                 />
               </div>
 
-              {/* Overlapping glass card */}
               <div className="absolute -bottom-6 left-1/2 w-[85%] -translate-x-1/2 rounded-2xl border border-white/40 bg-white/60 p-6 shadow-xl backdrop-blur-md">
                 <div className="flex items-center gap-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary/15">
                     <ShieldCheck className="h-6 w-6 text-secondary" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-ink">Trusted by 2,500+ Clients</p>
-                    <p className="mt-0.5 text-xs text-ink/50">
-                      Across all Emirates in the UAE
-                    </p>
+                    <p className="text-sm font-semibold text-ink">{t.home.trustedBy}</p>
+                    <p className="mt-0.5 text-xs text-ink/50">{t.home.trustedAcross}</p>
                   </div>
                 </div>
                 <div className="mt-5 grid grid-cols-3 gap-4">
                   <div>
                     <p className="text-2xl font-bold text-primary">12+</p>
-                    <p className="mt-1 text-xs text-ink/50">Years</p>
+                    <p className="mt-1 text-xs text-ink/50">{t.home.years}</p>
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-primary">25+</p>
-                    <p className="mt-1 text-xs text-ink/50">Experts</p>
+                    <p className="mt-1 text-xs text-ink/50">{t.home.experts}</p>
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-primary">97%</p>
-                    <p className="mt-1 text-xs text-ink/50">Satisfaction</p>
+                    <p className="mt-1 text-xs text-ink/50">{t.home.satisfaction}</p>
                   </div>
                 </div>
               </div>
@@ -467,7 +369,7 @@ export default function Home() {
             className="text-center"
           >
             <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
-              Our Top Services
+              {t.home.servicesTitle}
             </h2>
             <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-primary" />
           </motion.div>
@@ -479,10 +381,10 @@ export default function Home() {
             viewport={{ once: true, margin: '-100px' }}
             className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 md:mt-16 lg:grid-cols-4"
           >
-            {services.map((service) => (
+            {t.home.services.map((service, i) => (
               <ServiceCard
                 key={service.title}
-                icon={service.icon}
+                icon={serviceIcons[i]}
                 title={service.title}
                 desc={service.desc}
               />
@@ -496,17 +398,13 @@ export default function Home() {
             transition={{ duration: 1, ease }}
             className="mt-14 text-center"
           >
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex"
-            >
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="inline-flex">
               <Link
                 to="/services"
                 className="inline-flex items-center gap-2 rounded-full bg-secondary px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-secondary/25 transition-all duration-300 hover:bg-[#155f30] hover:shadow-[0_0_20px_rgba(27,117,60,0.4)]"
               >
-                View All Services
-                <ArrowRight className="h-4 w-4" />
+                {t.home.servicesBtn}
+                <ArrowRight className="h-4 w-4 rtl:rotate-180" />
               </Link>
             </motion.div>
           </motion.div>
@@ -522,36 +420,25 @@ export default function Home() {
           viewport={{ once: true, margin: '-100px' }}
           className="mx-auto max-w-6xl px-4 md:px-8 lg:px-10"
         >
-          <motion.div
-            variants={blurReveal}
-            className="mb-14 text-center"
-          >
+          <motion.div variants={blurReveal} className="mb-14 text-center">
             <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
-              Why Choose Al Wthaq
+              {t.home.whyTitle}
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-sm text-ink/55 md:text-base">
-              A trusted partner for every transaction — built on precision, speed, and complete coverage.
+              {t.home.whyDesc}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
-            {features.map((feature) => {
-              const Icon = feature.icon;
+            {t.home.features.map((feature, i) => {
+              const Icon = featureIcons[i];
               return (
-                <motion.div
-                  key={feature.title}
-                  variants={blurReveal}
-                  className="flex flex-col items-center text-center"
-                >
+                <motion.div key={feature.title} variants={blurReveal} className="flex flex-col items-center text-center">
                   <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary/10">
                     <Icon className="h-8 w-8 text-secondary" strokeWidth={1.5} />
                   </div>
-                  <h3 className="mt-6 text-lg font-semibold tracking-tight text-ink">
-                    {feature.title}
-                  </h3>
-                  <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink/55">
-                    {feature.desc}
-                  </p>
+                  <h3 className="mt-6 text-lg font-semibold tracking-tight text-ink">{feature.title}</h3>
+                  <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink/55">{feature.desc}</p>
                 </motion.div>
               );
             })}
@@ -570,7 +457,7 @@ export default function Home() {
             className="text-center"
           >
             <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
-              Frequently Asked Questions
+              {t.home.faqTitle}
             </h2>
             <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-primary" />
           </motion.div>
@@ -582,7 +469,7 @@ export default function Home() {
             viewport={{ once: true, margin: '-100px' }}
             className="mt-10 flex flex-col gap-4 md:mt-14"
           >
-            {faqs.map((faq, i) => (
+            {t.home.faqs.map((faq, i) => (
               <FaqItem
                 key={faq.q}
                 q={faq.q}

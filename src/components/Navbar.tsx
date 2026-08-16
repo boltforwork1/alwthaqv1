@@ -2,18 +2,20 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
-
-const links = [
-  { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Services', to: '/services' },
-  { label: 'Contact', to: '/contact' },
-];
+import { useLanguage } from '@/context/LanguageContext';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
+
+  const links = [
+    { label: t.nav.home, to: '/' },
+    { label: t.nav.about, to: '/about' },
+    { label: t.nav.services, to: '/services' },
+    { label: t.nav.contact, to: '/contact' },
+  ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-black/5 bg-white/90 backdrop-blur-md">
@@ -46,11 +48,19 @@ export default function Navbar() {
         </ul>
 
         <div className="flex shrink-0 items-center gap-3">
+          <button
+            onClick={toggleLanguage}
+            className="inline-flex shrink-0 items-center rounded-full border border-primary/30 bg-primary/5 px-4 py-2 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary/10"
+            aria-label="Toggle language"
+          >
+            {language === 'en' ? 'عربي' : 'EN'}
+          </button>
+
           <Link
             to="/contact"
             className="hidden shrink-0 items-center rounded-full bg-primary px-6 py-2.5 text-base font-medium text-white shadow-sm shadow-primary/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-600 hover:shadow-md hover:shadow-primary/25 md:inline-flex"
           >
-            Get in Touch
+            {t.nav.getInTouch}
           </Link>
 
           <button
@@ -121,7 +131,7 @@ export default function Navbar() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block w-full rounded-full bg-primary px-6 py-4 text-center text-base font-semibold text-white shadow-lg shadow-primary/25 transition-colors duration-300 hover:bg-primary-600"
                 >
-                  Get in Touch
+                  {t.nav.getInTouch}
                 </Link>
               </li>
             </ul>

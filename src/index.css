@@ -16,4 +16,8 @@
   [dir='rtl'] {
     @apply font-arabic;
   }
+
+  [dir='rtl'] body {
+    @apply font-arabic;
+  }
 }

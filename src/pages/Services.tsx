@@ -1,19 +1,10 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import {
-  ArrowRight,
-  Briefcase,
-  Building2,
-  Car,
-  Check,
-  IdCard,
-  Landmark,
-  Signature as FileSignature,
-  X,
-} from 'lucide-react';
+import { ArrowRight, Briefcase, Building2, Car, Check, IdCard, Landmark, Signature as FileSignature, X } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
+import { useLanguage } from '@/context/LanguageContext';
 
-/* ---------- Shared animation helpers (matched to Home page) ---------- */
+/* ---------- Shared animation helpers ---------- */
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const blurReveal = {
@@ -31,99 +22,17 @@ const stagger = {
   show: { transition: { staggerChildren: 0.15 } },
 };
 
-/* ---------- Data ---------- */
-type ServiceItem = {
-  icon: typeof Building2;
-  title: string;
-  desc: string;
-  details: string[];
-  image: string;
-};
+/* ---------- Service icons ---------- */
+const serviceIcons = [Building2, IdCard, Briefcase, Landmark, Car, FileSignature];
 
-const mainServices: ServiceItem[] = [
-  {
-    icon: Building2,
-    title: 'Company Setup & Licensing',
-    desc: 'Trade name reservation, commercial license issuance & renewal, contract amendments, and company liquidation.',
-    image: '/images/service-setup.jpg',
-    details: [
-      'Trade Name Reservation & Initial Approvals',
-      'Commercial License Issuance & Annual Renewal',
-      'Amending Contracts & Commercial Registers (Adding/Removing partners, changing activities)',
-      'Cancellation & Liquidation of Licenses according to official requirements.',
-    ],
-  },
-  {
-    icon: IdCard,
-    title: 'Visas & Immigration',
-    desc: 'Employee & family residency issuance, visit visas, golden/green visas, and sponsorship transfers.',
-    image: '/images/service-visa.jpg',
-    details: [
-      'Issuance & Renewal of Employee/Family Residencies',
-      'Work Visas & Tourist/Visit Visas processing',
-      'Visa Cancellation & Sponsorship/Service Transfer',
-      'Golden & Green Visa Applications for investors and talents.',
-    ],
-  },
-  {
-    icon: Briefcase,
-    title: 'Ministry of Human Resources',
-    desc: 'Establishment card opening, labor contract processing, and salary/profession updates.',
-    image: '/images/service-mohre.jpg',
-    details: [
-      'Opening Establishment Cards & Company Registration',
-      'Issuing & Renewing Labor Contracts/Permits',
-      'Amending Professions & Updating Employee Salaries',
-      'Filing Absconding Reports & Resolving Labor Disputes.',
-    ],
-  },
-  {
-    icon: Landmark,
-    title: 'Municipalities & Approvals',
-    desc: 'Signage permits, structural modifications, health certificates, and civil defense approvals.',
-    image: '/images/service-municipality.jpg',
-    details: [
-      'Shop & Building Permits (Signage, Structural Modifications)',
-      'Health Certificates for the Food & Restaurant Sector',
-      'Civil Defense Approvals & Safety Licenses.',
-    ],
-  },
-  {
-    icon: Car,
-    title: 'Traffic & Vehicle Services',
-    desc: 'Vehicle ownership transfer, registration renewal, driving licenses, and traffic fines settlement.',
-    image: '/images/service-traffic.jpg',
-    details: [
-      'Transfer of Vehicle Ownership & Plate Issuance',
-      'Renewal of Driving & Vehicle Licenses',
-      'Vehicle Inspection Procedures',
-      'Traffic Fines Settlement & Official Objections.',
-    ],
-  },
-  {
-    icon: FileSignature,
-    title: 'Judicial & Notarization',
-    desc: 'Attestation of certificates, agency notarizations, commercial and residential lease agreements.',
-    image: '/images/service-notary.jpg',
-    details: [
-      'Attestation of Agencies & Certificates (Ministry of Foreign Affairs, Notary Public)',
-      'Notarization of Contracts (Commercial, Residential, Company MOAs).',
-    ],
-  },
-];
-
-const quickServices = [
-  'Visas & Residencies',
-  'Flight Tickets',
-  'Family Sponsorship',
-  'Bank Account Opening',
-  'Ejari (Tenancy Contracts)',
-  'Amer Center Services',
-  'Tasheel',
-  'Tadbeer',
-  'Tawjeeh',
-  'ICA Services',
-  'Police & Interior Ministry',
+/* ---------- Service images ---------- */
+const serviceImages = [
+  '/images/service-setup.jpg',
+  '/images/service-visa.jpg',
+  '/images/service-mohre.jpg',
+  '/images/service-municipality.jpg',
+  '/images/service-traffic.jpg',
+  '/images/service-notary.jpg',
 ];
 
 /* ---------- Service card ---------- */
@@ -133,12 +42,14 @@ function ServiceCard({
   desc,
   image,
   onView,
+  viewLabel,
 }: {
   icon: typeof Building2;
   title: string;
   desc: string;
   image: string;
   onView: () => void;
+  viewLabel: string;
 }) {
   return (
     <motion.div
@@ -155,10 +66,7 @@ function ServiceCard({
       </div>
       <div className="flex flex-1 flex-col p-6 md:p-8">
         <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-colors duration-300 group-hover:bg-primary">
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
+          <motion.div whileHover={{ scale: 1.1 }} transition={{ type: 'spring', stiffness: 300 }}>
             <Icon
               className="h-7 w-7 text-primary transition-colors duration-300 group-hover:text-white"
               strokeWidth={1.5}
@@ -171,8 +79,8 @@ function ServiceCard({
           onClick={onView}
           className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-ink/50 transition-colors duration-300 hover:text-primary"
         >
-          View Details
-          <ArrowRight className="h-4 w-4" />
+          {viewLabel}
+          <ArrowRight className="h-4 w-4 rtl:rotate-180" />
         </button>
       </div>
     </motion.div>
@@ -181,13 +89,18 @@ function ServiceCard({
 
 /* ---------- Service Modal ---------- */
 function ServiceModal({
-  service,
+  icon: Icon,
+  title,
+  desc,
+  details,
   onClose,
 }: {
-  service: ServiceItem;
+  icon: typeof Building2;
+  title: string;
+  desc: string;
+  details: readonly string[];
   onClose: () => void;
 }) {
-  const Icon = service.icon;
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -206,7 +119,7 @@ function ServiceModal({
       >
         <button
           onClick={onClose}
-          className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full bg-ink/5 text-ink/50 transition-colors duration-300 hover:bg-ink/10 hover:text-ink"
+          className="absolute end-5 top-5 flex h-9 w-9 items-center justify-center rounded-full bg-ink/5 text-ink/50 transition-colors duration-300 hover:bg-ink/10 hover:text-ink"
           aria-label="Close"
         >
           <X className="h-5 w-5" strokeWidth={2} />
@@ -215,13 +128,13 @@ function ServiceModal({
         <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10">
           <Icon className="h-7 w-7 text-primary" strokeWidth={1.5} />
         </div>
-        <h3 className="mt-6 text-xl font-bold tracking-tight text-ink md:text-2xl">{service.title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-ink/55">{service.desc}</p>
+        <h3 className="mt-6 text-xl font-bold tracking-tight text-ink md:text-2xl">{title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-ink/55">{desc}</p>
 
         <div className="mt-4 h-px w-full bg-ink/10" />
 
         <ul className="mt-6 flex flex-col gap-4">
-          {service.details.map((point) => (
+          {details.map((point) => (
             <li key={point} className="flex items-start gap-3">
               <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-secondary/15">
                 <Check className="h-3.5 w-3.5 text-secondary" strokeWidth={2.5} />
@@ -237,16 +150,16 @@ function ServiceModal({
 
 /* ---------- Page ---------- */
 export default function Services() {
-  const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
+  const { t } = useLanguage();
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   return (
     <PageTransition>
       {/* ===== Hero Header ===== */}
       <section className="relative w-full min-h-[40vh] overflow-hidden bg-[url('/images/services-header-bg.jpg')] bg-cover bg-center bg-no-repeat py-16 md:py-24 lg:py-28">
         <div className="absolute inset-0 bg-[#111111]/70" />
-        {/* glowing orbs */}
-        <div className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-[#1B753C]/25 blur-[120px]" />
-        <div className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-[#B32025]/20 blur-[130px]" />
+        <div className="pointer-events-none absolute -start-24 top-1/4 h-72 w-72 rounded-full bg-[#1B753C]/25 blur-[120px]" />
+        <div className="pointer-events-none absolute -end-16 bottom-0 h-80 w-80 rounded-full bg-[#B32025]/20 blur-[130px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
           <motion.div
@@ -257,10 +170,10 @@ export default function Services() {
             className="text-center"
           >
             <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
-              Our Premium Services
+              {t.services.heroTitle}
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-300 md:text-lg">
-              Comprehensive government transaction clearance for individuals and corporations.
+              {t.services.heroDesc}
             </p>
           </motion.div>
         </div>
@@ -276,14 +189,15 @@ export default function Services() {
             viewport={{ once: true, margin: '-100px' }}
             className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
-            {mainServices.map((service) => (
+            {t.services.mainServices.map((service, i) => (
               <ServiceCard
                 key={service.title}
-                icon={service.icon}
+                icon={serviceIcons[i]}
                 title={service.title}
                 desc={service.desc}
-                image={service.image}
-                onView={() => setSelectedService(service)}
+                image={serviceImages[i]}
+                onView={() => setSelectedIndex(i)}
+                viewLabel={t.services.viewDetails}
               />
             ))}
           </motion.div>
@@ -301,7 +215,7 @@ export default function Services() {
             className="text-center"
           >
             <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
-              We Also Facilitate
+              {t.services.alsoTitle}
             </h2>
             <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-primary" />
           </motion.div>
@@ -313,7 +227,7 @@ export default function Services() {
             viewport={{ once: true, margin: '-100px' }}
             className="mt-10 flex flex-wrap justify-center gap-3 md:mt-14 md:gap-4"
           >
-            {quickServices.map((tag) => (
+            {t.services.quickServices.map((tag) => (
               <motion.span
                 key={tag}
                 variants={blurReveal}
@@ -330,10 +244,13 @@ export default function Services() {
 
       {/* ===== Service Detail Modal ===== */}
       <AnimatePresence>
-        {selectedService && (
+        {selectedIndex !== null && (
           <ServiceModal
-            service={selectedService}
-            onClose={() => setSelectedService(null)}
+            icon={serviceIcons[selectedIndex]}
+            title={t.services.mainServices[selectedIndex].title}
+            desc={t.services.mainServices[selectedIndex].desc}
+            details={t.services.mainServices[selectedIndex].details}
+            onClose={() => setSelectedIndex(null)}
           />
         )}
       </AnimatePresence>

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock3, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import PageTransition from '@/components/PageTransition';
+import { useLanguage } from '@/context/LanguageContext';
 
 /* ---------- Shared animation helpers ---------- */
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -20,23 +21,24 @@ const stagger = {
   show: { transition: { staggerChildren: 0.1 } },
 };
 
-/* ---------- Data ---------- */
-const contactInfo = [
-  { icon: Phone, label: 'Phone 1', value: '+971 52 668 4071', href: 'tel:+971526684071' },
-  { icon: MessageCircle, label: 'WHATSAPP', value: '+971 55 527 6288', href: 'https://wa.me/971555276288' },
-  { icon: Mail, label: 'Email', value: 'alwethaqgroup@gmail.com', href: 'mailto:alwethaqgroup@gmail.com' },
-  { icon: MapPin, label: 'Address', value: 'Al Nuaimiya 1, Ajman, UAE, P.O Box: 067049022' },
-];
-
 /* ---------- Page ---------- */
 export default function Contact() {
+  const { t } = useLanguage();
+
+  const contactInfo = [
+    { icon: Phone, label: t.contact.phone1, value: '+971 52 668 4071', href: 'tel:+971526684071' },
+    { icon: MessageCircle, label: t.contact.whatsapp, value: '+971 55 527 6288', href: 'https://wa.me/971555276288' },
+    { icon: Mail, label: t.contact.email, value: 'alwethaqgroup@gmail.com', href: 'mailto:alwethaqgroup@gmail.com' },
+    { icon: MapPin, label: t.contact.address, value: t.contact.addressValue },
+  ];
+
   return (
     <PageTransition>
       {/* ===== Hero Header ===== */}
       <section className="relative w-full overflow-hidden bg-[url('/images/image.png')] bg-cover bg-center bg-no-repeat py-16 md:py-24 lg:py-28">
         <div className="absolute inset-0 bg-black/70 z-0" />
-        <div className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-[#1B753C]/25 blur-[120px]" />
-        <div className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-[#B32025]/20 blur-[130px]" />
+        <div className="pointer-events-none absolute -start-24 top-1/4 h-72 w-72 rounded-full bg-[#1B753C]/25 blur-[120px]" />
+        <div className="pointer-events-none absolute -end-16 bottom-0 h-80 w-80 rounded-full bg-[#B32025]/20 blur-[130px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
           <motion.div
@@ -47,10 +49,10 @@ export default function Contact() {
             className="text-center"
           >
             <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
-              Get in Touch
+              {t.contact.heroTitle}
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-300 md:text-lg">
-              We're here to help with all your government transaction needs. Reach out and our team will respond promptly.
+              {t.contact.heroDesc}
             </p>
           </motion.div>
         </div>
@@ -68,13 +70,13 @@ export default function Contact() {
               transition={{ duration: 1, ease }}
             >
               <span className="mb-4 inline-block text-sm font-semibold tracking-[0.2em] text-primary">
-                CONTACT INFORMATION
+                {t.contact.infoBadge}
               </span>
               <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
-                Let's Talk
+                {t.contact.title}
               </h2>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/55 md:text-base">
-                Reach us through any of the channels below, or fill out the form and we'll get back to you shortly.
+                {t.contact.desc}
               </p>
 
               <motion.div
@@ -99,7 +101,12 @@ export default function Contact() {
                   return (
                     <motion.div variants={blurReveal} key={label}>
                       {href ? (
-                        <a href={href} className="group block" target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                        <a
+                          href={href}
+                          className="group block"
+                          target={href.startsWith('http') ? '_blank' : undefined}
+                          rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        >
                           {inner}
                         </a>
                       ) : (
@@ -113,7 +120,8 @@ export default function Contact() {
               <div className="mt-8 flex items-center gap-3 rounded-2xl border border-black/5 bg-white p-4 md:p-5">
                 <Clock3 className="h-5 w-5 shrink-0 text-secondary" strokeWidth={1.8} />
                 <p className="text-sm text-ink/60">
-                  <span className="font-semibold text-ink">Working Hours:</span> Sunday – Thursday, 8:00 AM – 5:00 PM
+                  <span className="font-semibold text-ink">{t.contact.workingHours}:</span>{' '}
+                  {t.contact.workingHoursValue}
                 </p>
               </div>
             </motion.div>
@@ -129,12 +137,12 @@ export default function Contact() {
                 onSubmit={(e) => e.preventDefault()}
                 className="rounded-2xl border border-white/40 bg-white/60 p-6 shadow-xl backdrop-blur-md md:p-8 lg:p-10"
               >
-                <h3 className="text-xl font-bold tracking-tight text-ink md:text-2xl">Send Us a Message</h3>
-                <p className="mt-1 text-sm text-ink/50">Fill in the form below and we'll be in touch.</p>
+                <h3 className="text-xl font-bold tracking-tight text-ink md:text-2xl">{t.contact.formTitle}</h3>
+                <p className="mt-1 text-sm text-ink/50">{t.contact.formDesc}</p>
 
                 <div className="mt-8 flex flex-col gap-5">
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-ink/70">Full Name</label>
+                    <label className="mb-2 block text-sm font-medium text-ink/70">{t.contact.fullName}</label>
                     <input
                       type="text"
                       placeholder="John Doe"
@@ -144,7 +152,7 @@ export default function Contact() {
 
                   <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                     <div>
-                      <label className="mb-2 block text-sm font-medium text-ink/70">Email</label>
+                      <label className="mb-2 block text-sm font-medium text-ink/70">{t.contact.emailLabel}</label>
                       <input
                         type="email"
                         placeholder="you@example.com"
@@ -152,7 +160,7 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <label className="mb-2 block text-sm font-medium text-ink/70">Phone</label>
+                      <label className="mb-2 block text-sm font-medium text-ink/70">{t.contact.phone}</label>
                       <input
                         type="tel"
                         placeholder="+971 50 000 0000"
@@ -162,7 +170,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-ink/70">Subject</label>
+                    <label className="mb-2 block text-sm font-medium text-ink/70">{t.contact.subject}</label>
                     <input
                       type="text"
                       placeholder="How can we help?"
@@ -171,7 +179,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-ink/70">Message</label>
+                    <label className="mb-2 block text-sm font-medium text-ink/70">{t.contact.message}</label>
                     <textarea
                       rows={4}
                       placeholder="Tell us about your requirements..."
@@ -185,8 +193,8 @@ export default function Contact() {
                     whileTap={{ scale: 0.97 }}
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:bg-primary-600"
                   >
-                    Send Message
-                    <ArrowRight className="h-4 w-4" />
+                    {t.contact.submit}
+                    <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                   </motion.button>
                 </div>
               </form>
