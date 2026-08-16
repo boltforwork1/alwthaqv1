@@ -101,6 +101,15 @@ type Translation = {
     workingHoursValue: string;
     rights: string;
   };
+  assistant: {
+    title: string;
+    online: string;
+    welcome: string;
+    inputPlaceholder: string;
+    notSure: string;
+    talkOnWhatsApp: string;
+    questions: { q: string; a: string; links?: { label: string; url: string }[] }[];
+  };
 };
 
 const translations: Record<Language, Translation> = {
@@ -334,6 +343,34 @@ const translations: Record<Language, Translation> = {
       workingHoursValue: 'Sun – Thu, 8:00 – 17:00',
       rights: '© 2026 Al Wthaq Group. All rights reserved.',
     },
+    assistant: {
+      title: 'Al Wthaq Smart Assistant',
+      online: 'Online now',
+      welcome: 'Hello! I\'m your Al Wthaq virtual assistant. How can I help you today?',
+      inputPlaceholder: 'Type your question...',
+      notSure: "I'm not entirely sure about that. Our business consultants can give you the exact details.",
+      talkOnWhatsApp: 'Talk on WhatsApp',
+      questions: [
+        {
+          q: 'How much does business setup cost?',
+          a: 'Costs vary based on mainland vs. free zone. Starting prices are typically around 12,000 AED.',
+          links: [{ label: 'Explore Services', url: '/services' }],
+        },
+        {
+          q: 'Mainland vs Free Zone?',
+          a: 'Mainland allows trading anywhere in the UAE market. Free Zones offer 100% foreign ownership and zero tax but restrict local trading.',
+          links: [{ label: 'Free Zone Setup', url: '/services' }],
+        },
+        {
+          q: 'Do I need a local sponsor?',
+          a: 'Recent updates allow 100% foreign ownership for most commercial activities in the Mainland without a local sponsor.',
+        },
+        {
+          q: 'How long does it take?',
+          a: 'Usually 3 to 10 working days after document submission.',
+        },
+      ],
+    },
   },
   ar: {
     nav: {
@@ -564,6 +601,34 @@ const translations: Record<Language, Translation> = {
       workingHoursValue: 'الأحد – الخميس، 8:00 – 17:00',
       rights: '© 2026 مجموعة الوثاق. جميع الحقوق محفوظة.',
     },
+    assistant: {
+      title: 'مساعد الوثاق الذكي',
+      online: 'متصل الآن',
+      welcome: 'مرحباً! أنا المساعد الافتراضي لمجموعة الوثاق. كيف يمكنني مساعدتك اليوم؟',
+      inputPlaceholder: 'اكتب سؤالك...',
+      notSure: 'لست متأكداً تماماً من ذلك. يمكن لمستشارينا التجاريين تقديم التفاصيل الدقيقة.',
+      talkOnWhatsApp: 'تحدث عبر واتساب',
+      questions: [
+        {
+          q: 'كم تكلفة تأسيس شركة؟',
+          a: 'تختلف التكلفة حسب البر الرئيسي أم المنطقة الحرة. الأسعار تبدأ عادةً من حوالي 12,000 درهم.',
+          links: [{ label: 'استكشف الخدمات', url: '/services' }],
+        },
+        {
+          q: 'البر الرئيسي أم المنطقة الحرة؟',
+          a: 'البر الرئيسي يسمح بالتجارة في أي مكان في الإمارات. المناطق الحرة تقدم ملكية أجنبية 100% وبدون ضرائب لكنها تقيّد التجارة المحلية.',
+          links: [{ label: 'تأسيس المنطقة الحرة', url: '/services' }],
+        },
+        {
+          q: 'هل أحتاج كفيلاً محلياً؟',
+          a: 'التحديثات الأخيرة تسمح بالملكية الأجنبية 100% لمعظم الأنشطة التجارية في البر الرئيسي بدون كفيل محلي.',
+        },
+        {
+          q: 'كم تستغرق العملية؟',
+          a: 'عادةً من 3 إلى 10 أيام عمل بعد تقديم المستندات.',
+        },
+      ],
+    },
   },
 };
 
@@ -594,3 +659,6 @@ export function useLanguage() {
   if (!ctx) throw new Error('useLanguage must be used within a LanguageProvider');
   return ctx;
 }
+
+
+export { LanguageProvider }

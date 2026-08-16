@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, MessageCircle, X } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -55,6 +55,16 @@ export default function Navbar() {
           >
             {language === 'en' ? 'عربي' : 'EN'}
           </button>
+
+          <a
+            href="https://wa.me/971555276288"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat on WhatsApp"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[#1B753C] transition-colors duration-300 hover:bg-[#1B753C]/10"
+          >
+            <MessageCircle className="h-5 w-5" strokeWidth={1.8} />
+          </a>
 
           <Link
             to="/contact"

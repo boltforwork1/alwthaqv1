@@ -2,6 +2,7 @@ import { AnimatePresence } from 'framer-motion';
 import { Outlet, useLocation } from 'react-router-dom';
 import Footer from './Footer';
 import Navbar from './Navbar';
+import SmartAssistant from './SmartAssistant';
 
 export default function Layout() {
   const location = useLocation();
@@ -17,6 +18,7 @@ export default function Layout() {
         </AnimatePresence>
       </main>
       <Footer />
+      <SmartAssistant />
     </div>
   );
 }
