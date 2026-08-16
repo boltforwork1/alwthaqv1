@@ -124,7 +124,7 @@ function StatItem({
       variants={blurReveal}
       className="text-center"
     >
-      <div className="min-w-[150px] text-4xl font-bold tabular-nums tracking-tight text-secondary sm:text-5xl lg:text-6xl">
+      <div className="min-w-[120px] text-3xl font-bold tabular-nums tracking-tight text-secondary md:min-w-[150px] md:text-4xl sm:text-5xl lg:text-6xl">
         {display}
         {suffix}
       </div>
@@ -148,7 +148,7 @@ function ServiceCard({
   return (
     <motion.div
       variants={blurReveal}
-      className="group rounded-2xl border border-black/5 bg-white/70 p-8 shadow-sm backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-2 hover:border-[#1B753C]/30 hover:shadow-[0_20px_40px_-15px_rgba(27,117,60,0.15)]"
+      className="group rounded-2xl border border-black/5 bg-white/70 p-6 shadow-sm backdrop-blur-md transition-all duration-500 ease-out hover:-translate-y-2 hover:border-[#1B753C]/30 hover:shadow-[0_20px_40px_-15px_rgba(27,117,60,0.15)] md:p-8"
     >
       <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-colors duration-300 group-hover:bg-primary">
         <motion.div
@@ -176,9 +176,9 @@ function LeadFormCard() {
       animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       transition={{ duration: 1, ease, delay: 0.35 }}
       onSubmit={(e) => e.preventDefault()}
-      className="rounded-2xl border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-md"
+      className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-md md:p-8"
     >
-      <h3 className="text-2xl font-bold text-white">Request a Free Quote</h3>
+      <h3 className="text-xl font-bold text-white md:text-2xl">Request a Free Quote</h3>
       <p className="mb-6 mt-1 text-gray-300">Tell us a little about your business goals.</p>
 
       <div className="mb-4">
@@ -269,8 +269,8 @@ export default function Home() {
         <div className="absolute inset-0 bg-[#111111]/80" />
 
         <div className="relative z-10 flex min-h-screen items-center">
-          <div className="mx-auto w-full max-w-7xl px-6 py-24 lg:px-12">
-            <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <div className="mx-auto w-full max-w-7xl px-4 py-16 md:px-8 md:py-24 lg:px-12">
+            <div className="grid grid-cols-1 items-center gap-10 md:gap-12 lg:grid-cols-2">
               {/* Left column — text */}
               <div>
               <span
@@ -288,7 +288,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease, delay: 0.1 }}
-                className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
+                className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
               >
                 Business Setup &amp;{' '}
                 <span className="text-secondary">Government Transactions</span> in UAE
@@ -298,7 +298,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease, delay: 0.2 }}
-                className="mb-8 mt-6 max-w-xl text-lg leading-relaxed text-gray-300"
+                className="mb-8 mt-6 max-w-xl text-base leading-relaxed text-gray-300 md:text-lg"
               >
                 Our comprehensive services cover all individual and corporate needs with
                 official authorities. We save your time and effort while avoiding common errors.
@@ -347,14 +347,14 @@ export default function Home() {
       </section>
 
       {/* ===== Statistics (full-width dark band) ===== */}
-      <section className="w-full bg-ink py-20 lg:py-24">
+      <section className="w-full bg-ink py-12 md:py-20 lg:py-24">
         <motion.div
           ref={statsRef}
           variants={stagger}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-100px' }}
-          className="mx-auto grid max-w-7xl grid-cols-2 gap-12 px-6 lg:grid-cols-4 lg:gap-8 lg:px-10"
+          className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 md:gap-12 md:px-8 lg:grid-cols-4 lg:gap-8 lg:px-10"
         >
           {stats.map((stat) => (
             <StatItem
@@ -369,9 +369,9 @@ export default function Home() {
       </section>
 
       {/* ===== About Us Teaser ===== */}
-      <section className="bg-white py-24 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+      <section className="bg-white py-12 md:py-24 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
+          <div className="grid grid-cols-1 items-center gap-10 md:gap-16 lg:grid-cols-2">
             {/* Left — text */}
             <motion.div
               initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
@@ -382,10 +382,10 @@ export default function Home() {
               <span className="mb-4 inline-block text-sm font-semibold tracking-[0.2em] text-primary">
                 ABOUT US
               </span>
-              <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+              <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
                 Your Trusted Partner for Government Transactions
               </h2>
-              <p className="mt-6 max-w-lg text-base leading-relaxed text-ink/55">
+              <p className="mt-6 max-w-lg text-sm leading-relaxed text-ink/55 md:text-base">
                 With years of expertise in the UAE, Al Wthaq Group simplifies complex governmental
                 procedures. Whether you are an individual seeking residency or a corporation
                 expanding in Dubai, our dedicated consultants ensure seamless, error-free, and
@@ -412,7 +412,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 1, ease, delay: 0.15 }}
-              className="relative h-[420px]"
+              className="relative h-[320px] md:h-[420px]"
             >
               {/* Large framed image */}
               <div className="absolute inset-0 overflow-hidden rounded-2xl shadow-xl">
@@ -457,8 +457,8 @@ export default function Home() {
       </section>
 
       {/* ===== Core Services Grid ===== */}
-      <section className="bg-off-white py-24 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="bg-off-white py-12 md:py-24 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
           <motion.div
             initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -466,7 +466,7 @@ export default function Home() {
             transition={{ duration: 1, ease }}
             className="text-center"
           >
-            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
               Our Top Services
             </h2>
             <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-primary" />
@@ -477,7 +477,7 @@ export default function Home() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-100px' }}
-            className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+            className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 md:mt-16 lg:grid-cols-4"
           >
             {services.map((service) => (
               <ServiceCard
@@ -514,27 +514,27 @@ export default function Home() {
       </section>
 
       {/* ===== Why Us ===== */}
-      <section className="bg-white py-24 lg:py-28">
+      <section className="bg-white py-12 md:py-24 lg:py-28">
         <motion.div
           variants={stagger}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-100px' }}
-          className="mx-auto max-w-6xl px-6 lg:px-10"
+          className="mx-auto max-w-6xl px-4 md:px-8 lg:px-10"
         >
           <motion.div
             variants={blurReveal}
             className="mb-14 text-center"
           >
-            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
               Why Choose Al Wthaq
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base text-ink/55">
+            <p className="mx-auto mt-4 max-w-xl text-sm text-ink/55 md:text-base">
               A trusted partner for every transaction — built on precision, speed, and complete coverage.
             </p>
           </motion.div>
 
-          <div className="grid gap-8 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {features.map((feature) => {
               const Icon = feature.icon;
               return (
@@ -560,8 +560,8 @@ export default function Home() {
       </section>
 
       {/* ===== FAQ ===== */}
-      <section className="bg-off-white py-24 lg:py-28">
-        <div className="mx-auto max-w-3xl px-6 lg:px-10">
+      <section className="bg-off-white py-12 md:py-24 lg:py-28">
+        <div className="mx-auto max-w-3xl px-4 md:px-8 lg:px-10">
           <motion.div
             initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -569,7 +569,7 @@ export default function Home() {
             transition={{ duration: 1, ease }}
             className="text-center"
           >
-            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
               Frequently Asked Questions
             </h2>
             <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-primary" />
@@ -580,7 +580,7 @@ export default function Home() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-100px' }}
-            className="mt-14 flex flex-col gap-4"
+            className="mt-10 flex flex-col gap-4 md:mt-14"
           >
             {faqs.map((faq, i) => (
               <FaqItem

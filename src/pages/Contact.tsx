@@ -34,12 +34,12 @@ export default function Contact() {
   return (
     <PageTransition>
       {/* ===== Hero Header ===== */}
-      <section className="relative w-full overflow-hidden bg-[url('/images/image.png')] bg-cover bg-center bg-no-repeat py-24 lg:py-28">
+      <section className="relative w-full overflow-hidden bg-[url('/images/image.png')] bg-cover bg-center bg-no-repeat py-16 md:py-24 lg:py-28">
         <div className="absolute inset-0 bg-black/70 z-0" />
         <div className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-[#1B753C]/25 blur-[120px]" />
         <div className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-[#B32025]/20 blur-[130px]" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
           <motion.div
             initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -47,10 +47,10 @@ export default function Contact() {
             transition={{ duration: 1, ease }}
             className="text-center"
           >
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               Get in Touch
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-300">
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-300 md:text-lg">
               We're here to help with all your government transaction needs. Reach out and our team will respond promptly.
             </p>
           </motion.div>
@@ -58,9 +58,9 @@ export default function Contact() {
       </section>
 
       {/* ===== Contact Section ===== */}
-      <section className="bg-off-white py-24 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+      <section className="bg-off-white py-12 md:py-24 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
+          <div className="grid grid-cols-1 gap-10 md:gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left — Contact info */}
             <motion.div
               initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
@@ -71,10 +71,10 @@ export default function Contact() {
               <span className="mb-4 inline-block text-sm font-semibold tracking-[0.2em] text-primary">
                 CONTACT INFORMATION
               </span>
-              <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+              <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
                 Let's Talk
               </h2>
-              <p className="mt-4 max-w-md text-base leading-relaxed text-ink/55">
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/55 md:text-base">
                 Reach us through any of the channels below, or fill out the form and we'll get back to you shortly.
               </p>
 
@@ -83,7 +83,7 @@ export default function Contact() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: '-100px' }}
-                className="mt-10 flex flex-col gap-5"
+                className="mt-8 flex flex-col gap-5 md:mt-10"
               >
                 {contactInfo.map(({ icon: Icon, label, value, href }) => {
                   const inner = (
@@ -111,7 +111,7 @@ export default function Contact() {
                 })}
               </motion.div>
 
-              <div className="mt-8 flex items-center gap-3 rounded-2xl border border-black/5 bg-white p-5">
+              <div className="mt-8 flex items-center gap-3 rounded-2xl border border-black/5 bg-white p-4 md:p-5">
                 <Clock3 className="h-5 w-5 shrink-0 text-secondary" strokeWidth={1.8} />
                 <p className="text-sm text-ink/60">
                   <span className="font-semibold text-ink">Working Hours:</span> Sunday – Thursday, 8:00 AM – 5:00 PM
@@ -128,9 +128,9 @@ export default function Contact() {
             >
               <form
                 onSubmit={(e) => e.preventDefault()}
-                className="rounded-2xl border border-white/40 bg-white/60 p-8 shadow-xl backdrop-blur-md lg:p-10"
+                className="rounded-2xl border border-white/40 bg-white/60 p-6 shadow-xl backdrop-blur-md md:p-8 lg:p-10"
               >
-                <h3 className="text-2xl font-bold tracking-tight text-ink">Send Us a Message</h3>
+                <h3 className="text-xl font-bold tracking-tight text-ink md:text-2xl">Send Us a Message</h3>
                 <p className="mt-1 text-sm text-ink/50">Fill in the form below and we'll be in touch.</p>
 
                 <div className="mt-8 flex flex-col gap-5">

@@ -11,8 +11,8 @@ const navigation = [
 export default function Footer() {
   return (
     <footer className="bg-[#FAFAFA] text-ink">
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[1.4fr_0.8fr_1fr] lg:gap-20 lg:px-10 lg:py-16">
-        <div>
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 py-12 md:px-8 lg:grid-cols-[1.4fr_0.8fr_1fr] lg:gap-20 lg:px-10 lg:py-16">
+        <div className="flex flex-col items-center text-center md:items-start md:text-left">
           <Link to="/" aria-label="Al Wthaq Group home" className="inline-block">
             <img
               src="/logo.png"
@@ -26,9 +26,9 @@ export default function Footer() {
           <div className="mt-7 h-px w-full max-w-sm bg-ink/10" />
         </div>
 
-        <div>
+        <div className="flex flex-col items-center md:items-start">
           <h2 className="text-xs font-semibold tracking-[0.2em] text-ink/50">NAVIGATION</h2>
-          <nav className="mt-6 flex flex-col items-start gap-4">
+          <nav className="mt-6 flex flex-col items-center gap-4 md:items-start">
             {navigation.map((item) => (
               <Link
                 key={item.to}
@@ -41,7 +41,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div>
+        <div className="flex flex-col items-center md:items-start">
           <h2 className="text-xs font-semibold tracking-[0.2em] text-ink/50">CONTACT</h2>
           <div className="mt-6 flex flex-col gap-4">
             {/* Phone 1 */}
@@ -102,8 +102,8 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-ink/10">
-        <div className="mx-auto max-w-7xl px-5 py-5 sm:px-8 lg:px-10">
-          <p className="text-xs text-ink/45">© 2026 Al Wthaq Group. All rights reserved.</p>
+        <div className="mx-auto max-w-7xl px-4 py-5 md:px-8 lg:px-10">
+          <p className="text-center text-xs text-ink/45 md:text-left">© 2026 Al Wthaq Group. All rights reserved.</p>
         </div>
       </div>
     </footer>

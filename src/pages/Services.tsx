@@ -153,7 +153,7 @@ function ServiceCard({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
       </div>
-      <div className="flex flex-1 flex-col p-8">
+      <div className="flex flex-1 flex-col p-6 md:p-8">
         <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-colors duration-300 group-hover:bg-primary">
           <motion.div
             whileHover={{ scale: 1.1 }}
@@ -202,7 +202,7 @@ function ServiceModal({
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ duration: 0.3, ease }}
         onClick={(e) => e.stopPropagation()}
-        className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-8 shadow-2xl"
+        className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl md:p-8"
       >
         <button
           onClick={onClose}
@@ -215,7 +215,7 @@ function ServiceModal({
         <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10">
           <Icon className="h-7 w-7 text-primary" strokeWidth={1.5} />
         </div>
-        <h3 className="mt-6 text-2xl font-bold tracking-tight text-ink">{service.title}</h3>
+        <h3 className="mt-6 text-xl font-bold tracking-tight text-ink md:text-2xl">{service.title}</h3>
         <p className="mt-2 text-sm leading-relaxed text-ink/55">{service.desc}</p>
 
         <div className="mt-4 h-px w-full bg-ink/10" />
@@ -242,13 +242,13 @@ export default function Services() {
   return (
     <PageTransition>
       {/* ===== Hero Header ===== */}
-      <section className="relative w-full min-h-[40vh] overflow-hidden bg-[url('/images/services-header-bg.jpg')] bg-cover bg-center bg-no-repeat py-24 lg:py-28">
+      <section className="relative w-full min-h-[40vh] overflow-hidden bg-[url('/images/services-header-bg.jpg')] bg-cover bg-center bg-no-repeat py-16 md:py-24 lg:py-28">
         <div className="absolute inset-0 bg-[#111111]/70" />
         {/* glowing orbs */}
         <div className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-[#1B753C]/25 blur-[120px]" />
         <div className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-[#B32025]/20 blur-[130px]" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
           <motion.div
             initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -256,10 +256,10 @@ export default function Services() {
             transition={{ duration: 1, ease }}
             className="text-center"
           >
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               Our Premium Services
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-300">
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-300 md:text-lg">
               Comprehensive government transaction clearance for individuals and corporations.
             </p>
           </motion.div>
@@ -267,14 +267,14 @@ export default function Services() {
       </section>
 
       {/* ===== Main Services Grid ===== */}
-      <section className="bg-off-white py-24 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="bg-off-white py-12 md:py-24 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
           <motion.div
             variants={stagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-100px' }}
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {mainServices.map((service) => (
               <ServiceCard
@@ -291,8 +291,8 @@ export default function Services() {
       </section>
 
       {/* ===== Quick Services Tags ===== */}
-      <section className="bg-white py-24 lg:py-28">
-        <div className="mx-auto max-w-5xl px-6 lg:px-10">
+      <section className="bg-white py-12 md:py-24 lg:py-28">
+        <div className="mx-auto max-w-5xl px-4 md:px-8 lg:px-10">
           <motion.div
             initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -300,7 +300,7 @@ export default function Services() {
             transition={{ duration: 1, ease }}
             className="text-center"
           >
-            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
               We Also Facilitate
             </h2>
             <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-primary" />
@@ -311,7 +311,7 @@ export default function Services() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-100px' }}
-            className="mt-14 flex flex-wrap justify-center gap-4"
+            className="mt-10 flex flex-wrap justify-center gap-3 md:mt-14 md:gap-4"
           >
             {quickServices.map((tag) => (
               <motion.span
@@ -319,7 +319,7 @@ export default function Services() {
                 variants={blurReveal}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 300 }}
-                className="cursor-default rounded-full border border-black/5 bg-off-white px-6 py-3 text-sm font-medium text-ink/70 transition-colors duration-300 hover:border-primary/30 hover:text-primary"
+                className="cursor-default rounded-full border border-black/5 bg-off-white px-4 py-2.5 text-sm font-medium text-ink/70 transition-colors duration-300 hover:border-primary/30 hover:text-primary md:px-6 md:py-3"
               >
                 {tag}
               </motion.span>

@@ -50,12 +50,12 @@ export default function About() {
   return (
     <PageTransition>
       {/* ===== Hero Header ===== */}
-      <section className="relative w-full min-h-[40vh] overflow-hidden bg-[url('/images/about-header-bg.jpg')] bg-cover bg-center bg-no-repeat py-24 lg:py-28">
+      <section className="relative w-full min-h-[40vh] overflow-hidden bg-[url('/images/about-header-bg.jpg')] bg-cover bg-center bg-no-repeat py-16 md:py-24 lg:py-28">
         <div className="absolute inset-0 bg-[#111111]/70" />
         <div className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-[#1B753C]/25 blur-[120px]" />
         <div className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-[#B32025]/20 blur-[130px]" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
           <motion.div
             initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -63,10 +63,10 @@ export default function About() {
             transition={{ duration: 1, ease }}
             className="text-center"
           >
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               About Al Wthaq Group
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-300">
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-300 md:text-lg">
               Your trusted partner in navigating UAE's government and corporate landscape.
             </p>
           </motion.div>
@@ -74,9 +74,9 @@ export default function About() {
       </section>
 
       {/* ===== Who We Are ===== */}
-      <section className="bg-white py-24 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+      <section className="bg-white py-12 md:py-24 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
+          <div className="grid grid-cols-1 items-center gap-10 md:gap-16 lg:grid-cols-2">
             <motion.div
               initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -86,10 +86,10 @@ export default function About() {
               <span className="mb-4 inline-block text-sm font-semibold tracking-[0.2em] text-primary">
                 WHO WE ARE
               </span>
-              <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+              <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
                 Excellence in Government Services
               </h2>
-              <p className="mt-6 max-w-lg text-base leading-relaxed text-ink/55">
+              <p className="mt-6 max-w-lg text-sm leading-relaxed text-ink/55 md:text-base">
                 Al Wthaq Group is a leading documents clearance and corporate services provider
                 in the UAE. We specialize in simplifying complex governmental procedures for
                 investors, entrepreneurs, and individuals. Our expert team ensures that your
@@ -103,7 +103,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 1, ease, delay: 0.15 }}
-              className="relative h-[480px]"
+              className="relative h-[320px] md:h-[480px]"
             >
               <div className="h-full w-full overflow-hidden rounded-2xl shadow-xl">
                 <img
@@ -123,14 +123,14 @@ export default function About() {
       </section>
 
       {/* ===== Mission & Vision ===== */}
-      <section className="bg-off-white py-24 lg:py-28">
-        <div className="mx-auto max-w-5xl px-6 lg:px-10">
+      <section className="bg-off-white py-12 md:py-24 lg:py-28">
+        <div className="mx-auto max-w-5xl px-4 md:px-8 lg:px-10">
           <motion.div
             variants={stagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-100px' }}
-            className="grid gap-6 sm:grid-cols-2"
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2"
           >
             <motion.div
               variants={blurReveal}
@@ -164,9 +164,9 @@ export default function About() {
       </section>
 
       {/* ===== Core Values ===== */}
-      <section className="relative w-full overflow-hidden bg-[url('/images/values-bg.jpg')] bg-cover bg-center bg-no-repeat py-24 lg:py-28">
+      <section className="relative w-full overflow-hidden bg-[url('/images/values-bg.jpg')] bg-cover bg-center bg-no-repeat py-12 md:py-24 lg:py-28">
         <div className="absolute inset-0 bg-[#111111]/85" />
-        <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-10">
+        <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-8 lg:px-10">
           <motion.div
             initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -174,7 +174,7 @@ export default function About() {
             transition={{ duration: 1, ease }}
             className="text-center"
           >
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
               Why Choose Us
             </h2>
             <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-primary" />
@@ -185,7 +185,7 @@ export default function About() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-100px' }}
-            className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+            className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:mt-16 lg:grid-cols-4"
           >
             {values.map((value) => (
               <ValueCard
@@ -200,7 +200,7 @@ export default function About() {
       </section>
 
       {/* ===== CTA Banner ===== */}
-      <section className="bg-primary px-6 py-20 lg:py-24">
+      <section className="bg-primary px-4 py-12 md:px-6 md:py-20 lg:py-24">
         <motion.div
           initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -208,7 +208,7 @@ export default function About() {
           transition={{ duration: 1, ease }}
           className="mx-auto flex max-w-4xl flex-col items-center text-center"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
             Ready to Start Your Business Journey?
           </h2>
           <motion.div
