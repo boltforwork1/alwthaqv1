@@ -95,51 +95,6 @@ function ServiceCard({
   );
 }
 
-/* ---------- Lead form card ---------- */
-function LeadFormCard() {
-  const { t } = useLanguage();
-  return (
-    <motion.form
-      initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
-      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      transition={{ duration: 1, ease, delay: 0.35 }}
-      onSubmit={(e) => e.preventDefault()}
-      className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-md md:p-8"
-    >
-      <h3 className="text-xl font-bold text-white md:text-2xl">{t.home.quoteTitle}</h3>
-      <p className="mb-6 mt-1 text-gray-300">{t.home.quoteDesc}</p>
-
-      <div className="mb-4">
-        <label className="mb-2 block text-sm text-gray-200">{t.home.quoteName}</label>
-        <input
-          type="text"
-          placeholder="John Doe"
-          className="w-full rounded-lg border border-white/20 bg-black/20 p-3 text-white placeholder-gray-400 focus:border-green-500 focus:outline-none"
-        />
-      </div>
-
-      <div className="mb-6">
-        <label className="mb-2 block text-sm text-gray-200">{t.home.quoteContact}</label>
-        <input
-          type="text"
-          placeholder="you@example.com"
-          className="w-full rounded-lg border border-white/20 bg-black/20 p-3 text-white placeholder-gray-400 focus:border-green-500 focus:outline-none"
-        />
-      </div>
-
-      <motion.button
-        type="submit"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.97 }}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-secondary px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#155f30]"
-      >
-        {t.home.quoteSubmit}
-        <ArrowRight className="h-4 w-4 rtl:rotate-180" />
-      </motion.button>
-    </motion.form>
-  );
-}
-
 /* ---------- FAQ accordion item ---------- */
 function FaqItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) {
   return (
@@ -260,8 +215,25 @@ export default function Home() {
                 </motion.div>
               </div>
 
-              {/* Right column — lead form */}
-              <LeadFormCard />
+              {/* Right column — animated logo */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                className="flex items-center justify-center"
+              >
+                <motion.div
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                  className="w-full"
+                >
+                  <img
+                    src="/logo.png"
+                    alt="Al Wthaq Group"
+                    className="w-[70%] sm:w-[80%] md:w-full max-w-[500px] mx-auto object-contain drop-shadow-2xl"
+                  />
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         </div>
