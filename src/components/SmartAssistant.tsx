@@ -185,7 +185,7 @@ export default function SmartAssistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ duration: 0.3, ease }}
-            className="fixed bottom-6 end-6 z-[60] flex h-[520px] w-[350px] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+            className="fixed bottom-6 end-4 z-50 flex h-[520px] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl sm:w-[380px]"
             dir={isRTL ? 'rtl' : 'ltr'}
           >
             {/* ===== Header ===== */}
@@ -350,8 +350,8 @@ export default function SmartAssistant() {
             </AnimatePresence>
 
             {/* ===== Input Area ===== */}
-            <div className="border-t border-black/5 bg-white px-4 py-3">
-              <div className="flex items-center gap-2">
+            <div className="box-border w-full border-t border-black/5 bg-white px-4 py-3">
+              <div className="flex w-full items-center gap-2">
                 <input
                   ref={inputRef}
                   type="text"
