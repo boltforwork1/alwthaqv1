@@ -35,6 +35,7 @@ export default function Contact() {
     <PageTransition>
       {/* ===== Hero Header ===== */}
       <section className="relative w-full overflow-hidden bg-[url('/images/image.png')] bg-cover bg-center bg-no-repeat py-24 lg:py-28">
+        <div className="absolute inset-0 bg-black/70 z-0" />
         <div className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-[#1B753C]/25 blur-[120px]" />
         <div className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-[#B32025]/20 blur-[130px]" />
 
