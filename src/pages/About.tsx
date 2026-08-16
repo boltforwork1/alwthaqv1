@@ -98,47 +98,26 @@ export default function About() {
               </p>
             </motion.div>
 
-            <div className="relative h-[480px]">
-              {/* Tall image */}
-              <motion.div
-                initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
-                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 1, ease, delay: 0.15 }}
-                className="absolute left-0 top-0 h-full w-[65%] overflow-hidden rounded-2xl shadow-xl"
-              >
+            <motion.div
+              initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 1, ease, delay: 0.15 }}
+              className="relative h-[480px]"
+            >
+              <div className="h-full w-full overflow-hidden rounded-2xl shadow-xl">
                 <img
                   src="/images/about-1.jpg"
                   alt="Al Wthaq Group office"
                   className="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-110"
                 />
-              </motion.div>
-              {/* Square image overlapping */}
-              <motion.div
-                initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
-                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 1, ease, delay: 0.3 }}
-                className="absolute bottom-0 right-0 h-[55%] w-[50%] overflow-hidden rounded-2xl border-4 border-white shadow-xl"
-              >
-                <img
-                  src="/images/about-2.jpg"
-                  alt="Consultants at work"
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-110"
-                />
-              </motion.div>
+              </div>
               {/* Stats badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
-                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 1, ease, delay: 0.45 }}
-                className="absolute -top-4 right-8 rounded-2xl border border-white/40 bg-white/70 px-6 py-4 shadow-xl backdrop-blur-md"
-              >
+              <div className="absolute -bottom-6 left-6 rounded-2xl border border-white/40 bg-white/70 px-6 py-4 shadow-xl backdrop-blur-md">
                 <p className="text-2xl font-bold text-primary">12+</p>
                 <p className="mt-0.5 text-xs font-medium text-ink/60">Years of Excellence</p>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
