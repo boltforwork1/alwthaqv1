@@ -108,7 +108,7 @@ type Translation = {
     inputPlaceholder: string;
     notSure: string;
     talkOnWhatsApp: string;
-    questions: { q: string; a: string; links?: { label: string; url: string }[] }[];
+    questions: { id: number; q: string; a: string; links?: { label: string; url: string }[] }[];
   };
 };
 
@@ -352,22 +352,41 @@ const translations: Record<Language, Translation> = {
       talkOnWhatsApp: 'Talk on WhatsApp',
       questions: [
         {
+          id: 1,
           q: 'How much does business setup cost?',
           a: 'Costs vary based on mainland vs. free zone. Starting prices are typically around 12,000 AED.',
           links: [{ label: 'Explore Services', url: '/services' }],
         },
         {
+          id: 2,
           q: 'Mainland vs Free Zone?',
-          a: 'Mainland allows trading anywhere in the UAE market. Free Zones offer 100% foreign ownership and zero tax but restrict local trading.',
+          a: 'Mainland allows trading anywhere in the UAE market. Free Zones offer 100% foreign ownership and zero tax but restrict local trading to within the zone.',
           links: [{ label: 'Free Zone Setup', url: '/services' }],
         },
         {
+          id: 3,
           q: 'Do I need a local sponsor?',
-          a: 'Recent updates allow 100% foreign ownership for most commercial activities in the Mainland without a local sponsor.',
+          a: 'Recent updates allow 100% foreign ownership for most commercial activities in the Mainland without requiring a local sponsor.',
         },
         {
+          id: 4,
           q: 'How long does it take?',
-          a: 'Usually 3 to 10 working days after document submission.',
+          a: 'Usually 3 to 10 working days after document submission, depending on the authority.',
+        },
+        {
+          id: 5,
+          q: 'Can you help with Golden Visas?',
+          a: 'Yes, we handle the entire Golden Visa process for investors, entrepreneurs, and skilled professionals.',
+        },
+        {
+          id: 6,
+          q: 'Do I need physical office space?',
+          a: 'Not always. Many Free Zones and Mainland licenses now offer virtual office or Flexi-desk options to keep costs low.',
+        },
+        {
+          id: 7,
+          q: 'What about corporate bank accounts?',
+          a: 'We provide complete assistance with corporate bank account opening, ensuring all compliance and documentation requirements are met.',
         },
       ],
     },
@@ -610,22 +629,41 @@ const translations: Record<Language, Translation> = {
       talkOnWhatsApp: 'تحدث عبر واتساب',
       questions: [
         {
+          id: 1,
           q: 'كم تكلفة تأسيس شركة؟',
           a: 'تختلف التكلفة حسب البر الرئيسي أم المنطقة الحرة. الأسعار تبدأ عادةً من حوالي 12,000 درهم.',
           links: [{ label: 'استكشف الخدمات', url: '/services' }],
         },
         {
+          id: 2,
           q: 'البر الرئيسي أم المنطقة الحرة؟',
-          a: 'البر الرئيسي يسمح بالتجارة في أي مكان في الإمارات. المناطق الحرة تقدم ملكية أجنبية 100% وبدون ضرائب لكنها تقيّد التجارة المحلية.',
+          a: 'البر الرئيسي يسمح بالتجارة في أي مكان في الإمارات. المناطق الحرة تقدم ملكية أجنبية 100% وبدون ضرائب لكنها تقيّد التجارة المحلية داخل المنطقة.',
           links: [{ label: 'تأسيس المنطقة الحرة', url: '/services' }],
         },
         {
+          id: 3,
           q: 'هل أحتاج كفيلاً محلياً؟',
-          a: 'التحديثات الأخيرة تسمح بالملكية الأجنبية 100% لمعظم الأنشطة التجارية في البر الرئيسي بدون كفيل محلي.',
+          a: 'التحديثات الأخيرة تسمح بالملكية الأجنبية 100% لمعظم الأنشطة التجارية في البر الرئيسي بدون الحاجة إلى كفيل محلي.',
         },
         {
+          id: 4,
           q: 'كم تستغرق العملية؟',
-          a: 'عادةً من 3 إلى 10 أيام عمل بعد تقديم المستندات.',
+          a: 'عادةً من 3 إلى 10 أيام عمل بعد تقديم المستندات، حسب الجهة المختصة.',
+        },
+        {
+          id: 5,
+          q: 'هل يمكنكم المساعدة في التأشيرة الذهبية؟',
+          a: 'نعم، نتولى عملية التأشيرة الذهبية بالكامل للمستثمرين ورواد الأعمال والمواهب المهنية المتميزة.',
+        },
+        {
+          id: 6,
+          q: 'هل أحتاج إلى مكتب فعلي؟',
+          a: 'ليس دائماً. توفر العديد من المناطق الحرة والبر الرئيسي خيارات المكاتب الافتراضية أو المكاتب المرنة لتقليل التكاليف.',
+        },
+        {
+          id: 7,
+          q: 'ماذا عن الحسابات البنكية للشركات؟',
+          a: 'نقدم مساعدة كاملة في فتح الحسابات البنكية للشركات، مع ضمان تلبية جميع متطلبات الامتثال والتوثيق.',
         },
       ],
     },

@@ -1,6 +1,20 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Bot, RotateCcw, Send, X } from 'lucide-react';
+import {
+  Award,
+  Bot,
+  Building2,
+  Calculator,
+  Clock,
+  Landmark,
+  MapPin,
+  MessageCircle,
+  Phone,
+  RotateCcw,
+  Send,
+  Users,
+  X,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -16,12 +30,15 @@ const WHATSAPP_URL = 'https://wa.me/971555276288';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+const faqIcons = [Calculator, Building2, Users, Clock, Award, MapPin, Landmark];
+
 export default function SmartAssistant() {
   const { t, isRTL } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -39,7 +56,7 @@ export default function SmartAssistant() {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [messages]);
+  }, [messages, isTyping]);
 
   // Auto-suggest: filter FAQs based on input text
   const suggestions = useMemo(() => {
@@ -73,20 +90,26 @@ export default function SmartAssistant() {
     return bestScore > 0 ? bestMatch : null;
   };
 
+  const respondWith = (userText: string, botMessage: ChatMessage) => {
+    setMessages((prev) => [...prev, { role: 'user', text: userText }]);
+    setIsTyping(true);
+    const delay = 700 + Math.random() * 800;
+    setTimeout(() => {
+      setMessages((prev) => [...prev, botMessage]);
+      setIsTyping(false);
+    }, delay);
+  };
+
   const handleQuestionClick = (question: string) => {
     const match = knowledgeBase.find((item) => item.q === question);
     if (!match) return;
 
-    setMessages((prev) => [
-      ...prev,
-      { role: 'user', text: question },
-      {
-        role: 'bot',
-        text: match.a,
-        links: match.links,
-        showFaqs: true,
-      },
-    ]);
+    respondWith(question, {
+      role: 'bot',
+      text: match.a,
+      links: match.links,
+      showFaqs: true,
+    });
     setHasUserInteracted(true);
     setInput('');
   };
@@ -98,27 +121,19 @@ export default function SmartAssistant() {
     const match = findAnswer(text);
 
     if (match) {
-      setMessages((prev) => [
-        ...prev,
-        { role: 'user', text },
-        {
-          role: 'bot',
-          text: match.a,
-          links: match.links,
-          showFaqs: true,
-        },
-      ]);
+      respondWith(text, {
+        role: 'bot',
+        text: match.a,
+        links: match.links,
+        showFaqs: true,
+      });
     } else {
-      setMessages((prev) => [
-        ...prev,
-        { role: 'user', text },
-        {
-          role: 'bot',
-          text: t.assistant.notSure,
-          showWhatsApp: true,
-          showFaqs: true,
-        },
-      ]);
+      respondWith(text, {
+        role: 'bot',
+        text: t.assistant.notSure,
+        showWhatsApp: true,
+        showFaqs: true,
+      });
     }
     setHasUserInteracted(true);
     setInput('');
@@ -127,6 +142,7 @@ export default function SmartAssistant() {
   const handleReset = () => {
     setMessages([{ role: 'bot', text: t.assistant.welcome, showFaqs: true }]);
     setHasUserInteracted(false);
+    setIsTyping(false);
     setInput('');
     inputRef.current?.focus();
   };
@@ -252,7 +268,7 @@ export default function SmartAssistant() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1.5 rounded-full bg-[#1B753C] px-4 py-2 text-xs font-semibold text-white shadow-sm transition-colors duration-300 hover:bg-[#155f30]"
                         >
-                          <Bot className="h-3.5 w-3.5" strokeWidth={2} />
+                          <MessageCircle className="h-3.5 w-3.5" strokeWidth={2} />
                           {t.assistant.talkOnWhatsApp}
                         </a>
                       </div>
@@ -261,19 +277,47 @@ export default function SmartAssistant() {
                     {/* FAQ pills after bot messages */}
                     {msg.role === 'bot' && msg.showFaqs && (
                       <div className="mt-3 flex flex-wrap gap-2">
-                        {knowledgeBase.map((item) => (
-                          <button
-                            key={item.q}
-                            onClick={() => handleQuestionClick(item.q)}
-                            className="rounded-full border border-black/10 bg-white px-3 py-1.5 text-xs font-medium text-ink/60 transition-all duration-300 hover:border-[#1B753C]/30 hover:bg-[#1B753C]/5 hover:text-[#1B753C]"
-                          >
-                            {item.q}
-                          </button>
-                        ))}
+                        {knowledgeBase.map((item) => {
+                          const Icon = faqIcons[item.id - 1] ?? Bot;
+                          return (
+                            <button
+                              key={item.q}
+                              onClick={() => handleQuestionClick(item.q)}
+                              className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-white px-3 py-1.5 text-xs font-medium text-ink/60 transition-all duration-300 hover:border-[#1B753C]/30 hover:bg-[#1B753C]/5 hover:text-[#1B753C]"
+                            >
+                              <Icon className="h-3.5 w-3.5 shrink-0 text-ink/40 transition-colors duration-300 group-hover:text-[#1B753C]" strokeWidth={2} />
+                              {item.q}
+                            </button>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
                 ))}
+
+                {/* Typing indicator */}
+                <AnimatePresence>
+                  {isTyping && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 6 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex justify-start"
+                    >
+                      <div className="flex items-center gap-1 rounded-2xl border border-black/5 bg-white px-4 py-3">
+                        {[0, 1, 2].map((i) => (
+                          <motion.span
+                            key={i}
+                            animate={{ y: [0, -4, 0], opacity: [0.4, 1, 0.4] }}
+                            transition={{ duration: 1, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
+                            className="h-2 w-2 rounded-full bg-[#1B753C]"
+                          />
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
               <div ref={messagesEndRef} />
             </div>
@@ -288,15 +332,19 @@ export default function SmartAssistant() {
                   transition={{ duration: 0.2 }}
                   className="absolute bottom-[68px] start-4 end-4 rounded-xl border border-black/10 bg-white shadow-lg"
                 >
-                  {suggestions.map((item) => (
-                    <button
-                      key={item.q}
-                      onClick={() => handleQuestionClick(item.q)}
-                      className="block w-full px-4 py-2.5 text-start text-xs text-ink/70 transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl hover:bg-[#1B753C]/5 hover:text-[#1B753C]"
-                    >
-                      {item.q}
-                    </button>
-                  ))}
+                  {suggestions.map((item) => {
+                    const Icon = faqIcons[item.id - 1] ?? Bot;
+                    return (
+                      <button
+                        key={item.q}
+                        onClick={() => handleQuestionClick(item.q)}
+                        className="flex w-full items-center gap-2.5 px-4 py-2.5 text-start text-xs text-ink/70 transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl hover:bg-[#1B753C]/5 hover:text-[#1B753C]"
+                      >
+                        <Icon className="h-3.5 w-3.5 shrink-0 text-ink/40" strokeWidth={2} />
+                        {item.q}
+                      </button>
+                    );
+                  })}
                 </motion.div>
               )}
             </AnimatePresence>
