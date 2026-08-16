@@ -169,6 +169,26 @@ export default function Home() {
                   {t.home.badge}
                 </span>
 
+                {/* Mobile-only floating logo */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                  className="block md:hidden my-6 w-3/4 max-w-[250px] mx-auto"
+                >
+                  <motion.div
+                    animate={{ y: [0, -15, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                    className="flex items-center justify-center w-full"
+                  >
+                    <img
+                      src="/logo-white.png"
+                      alt="Al Wthaq Group"
+                      className="w-full h-auto object-contain drop-shadow-2xl"
+                    />
+                  </motion.div>
+                </motion.div>
+
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -215,12 +235,12 @@ export default function Home() {
                 </motion.div>
               </div>
 
-              {/* Right column — animated logo */}
+              {/* Right column — animated logo (desktop only) */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                className="flex items-center justify-center"
+                className="hidden md:flex items-center justify-center"
               >
                 <motion.div
                   animate={{ y: [0, -15, 0] }}
