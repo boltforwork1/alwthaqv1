@@ -225,12 +225,13 @@ export default function Home() {
                 <motion.div
                   animate={{ y: [0, -15, 0] }}
                   transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                  className="w-full"
+                  className="relative inline-flex items-center justify-center p-8 md:p-12 w-full max-w-[400px] mx-auto"
                 >
+                  <div className="absolute inset-0 bg-white/70 backdrop-blur-xl border border-white/40 rounded-[3rem] shadow-[0_0_80px_rgba(255,255,255,0.15)] -z-10" />
                   <img
                     src="/logo.png"
                     alt="Al Wthaq Group"
-                    className="w-[70%] sm:w-[80%] md:w-full max-w-[500px] mx-auto object-contain drop-shadow-2xl"
+                    className="relative z-10 w-full h-auto object-contain"
                   />
                 </motion.div>
               </motion.div>
