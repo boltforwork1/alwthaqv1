@@ -17,7 +17,7 @@ export default function Footer() {
             <img
               src="/logo.png"
               alt="Al Wthaq Group"
-              className="h-24 w-auto object-contain sm:h-24 lg:h-[100px]"
+              className="h-28 w-auto object-contain sm:h-32 lg:h-36"
             />
           </Link>
           <p className="mt-5 max-w-xs text-sm leading-7 text-ink/60">
