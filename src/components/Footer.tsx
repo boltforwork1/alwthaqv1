@@ -53,21 +53,12 @@ export default function Footer() {
               </div>
             </a>
 
-            {/* Phone 2 */}
-            <a href="tel:+971555276288" className="group flex items-start gap-3">
-              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-primary transition-colors duration-300 group-hover:text-primary-600" strokeWidth={1.8} />
-              <div className="text-sm">
-                <p className="text-xs text-ink/45">Phone 2</p>
-                <p className="mt-0.5 text-ink/75 transition-colors duration-300 group-hover:text-primary">+971 55 527 6288</p>
-              </div>
-            </a>
-
             {/* WhatsApp */}
-            <a href="https://wa.me/971506659694" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3">
+            <a href="https://wa.me/971555276288" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3">
               <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary transition-colors duration-300 group-hover:text-primary-600" strokeWidth={1.8} />
               <div className="text-sm">
                 <p className="text-xs text-ink/45">WhatsApp</p>
-                <p className="mt-0.5 text-ink/75 transition-colors duration-300 group-hover:text-primary">+971 50 665 9694</p>
+                <p className="mt-0.5 text-ink/75 transition-colors duration-300 group-hover:text-primary">+971 55 527 6288</p>
               </div>
             </a>
 
