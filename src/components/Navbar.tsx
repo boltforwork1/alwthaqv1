@@ -24,7 +24,7 @@ export default function Navbar() {
           <img
             src="/logo.png"
             alt="Al Wthaq Group"
-            className="h-10 w-auto object-contain md:h-16 lg:h-20"
+            className="h-10 md:h-16 lg:h-20 w-auto object-contain scale-[1.8] md:scale-100 origin-start"
           />
         </Link>
 
