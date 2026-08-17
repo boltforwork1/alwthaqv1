@@ -160,7 +160,7 @@ export default function Home() {
             <div className="grid grid-cols-1 items-center gap-10 md:gap-12 lg:grid-cols-2">
               {/* Left column — text */}
               <div>
-                <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/50 px-4 py-1 text-sm font-medium text-gray-800 shadow-sm backdrop-blur-sm">
+                <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/50 px-4 py-1 text-sm font-medium text-gray-800 shadow-sm drop-shadow-sm backdrop-blur-sm">
                   <motion.span
                     animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8], filter: ['blur(2px)', 'blur(0px)', 'blur(2px)'] }}
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
@@ -193,7 +193,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease, delay: 0.1 }}
-                  className="text-3xl font-bold leading-tight tracking-tight text-gray-900 sm:text-4xl md:text-5xl lg:text-6xl"
+                  className="text-3xl font-bold leading-tight tracking-tight text-gray-900 drop-shadow-[0_2px_10px_rgba(0,0,0,0.2)] sm:text-4xl md:text-5xl lg:text-6xl"
                 >
                   {t.home.heroTitle.split(' ').slice(0, -3).join(' ')}{' '}
                   <span className="text-secondary">{t.home.heroTitle.split(' ').slice(-3).join(' ')}</span>
@@ -203,7 +203,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease, delay: 0.2 }}
-                  className="mb-8 mt-6 max-w-xl text-base leading-relaxed text-gray-700 md:text-lg"
+                  className="mb-8 mt-6 max-w-xl text-base leading-relaxed text-gray-700 drop-shadow-md md:text-lg"
                 >
                   {t.home.heroDesc}
                 </motion.p>
