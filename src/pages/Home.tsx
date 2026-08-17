@@ -153,7 +153,7 @@ export default function Home() {
     <PageTransition>
       {/* ===== Hero ===== */}
       <section className="relative w-full min-h-screen overflow-hidden bg-[url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80')] bg-cover bg-center bg-no-repeat">
-        <div className="absolute inset-0 bg-white/90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/50 to-white/30" />
 
         <div className="relative z-10 flex min-h-screen items-center">
           <div className="mx-auto w-full max-w-7xl px-4 py-16 md:px-8 md:py-24 lg:px-12">
