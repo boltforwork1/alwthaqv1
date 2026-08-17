@@ -153,18 +153,18 @@ export default function Home() {
     <PageTransition>
       {/* ===== Hero ===== */}
       <section className="relative w-full min-h-screen overflow-hidden bg-[url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80')] bg-cover bg-center bg-no-repeat">
-        <div className="absolute inset-0 bg-[#111111]/80" />
+        <div className="absolute inset-0 bg-white/90" />
 
         <div className="relative z-10 flex min-h-screen items-center">
           <div className="mx-auto w-full max-w-7xl px-4 py-16 md:px-8 md:py-24 lg:px-12">
             <div className="grid grid-cols-1 items-center gap-10 md:gap-12 lg:grid-cols-2">
               {/* Left column — text */}
               <div>
-                <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm text-white">
+                <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/50 px-4 py-1 text-sm font-medium text-gray-800 shadow-sm backdrop-blur-sm">
                   <motion.span
                     animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8], filter: ['blur(2px)', 'blur(0px)', 'blur(2px)'] }}
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                    className="h-2 w-2 rounded-full bg-[#2EE6A6]"
+                    className="h-2 w-2 rounded-full bg-[#1B753C]"
                   />
                   {t.home.badge}
                 </span>
@@ -182,9 +182,9 @@ export default function Home() {
                     className="flex items-center justify-center w-full"
                   >
                     <img
-                      src="/logo-white.png"
+                      src="/logo.png"
                       alt="Al Wthaq Group"
-                      className="w-full h-auto object-contain drop-shadow-2xl"
+                      className="w-full h-auto object-contain drop-shadow-xl"
                     />
                   </motion.div>
                 </motion.div>
@@ -193,7 +193,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease, delay: 0.1 }}
-                  className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
+                  className="text-3xl font-bold leading-tight tracking-tight text-gray-900 sm:text-4xl md:text-5xl lg:text-6xl"
                 >
                   {t.home.heroTitle.split(' ').slice(0, -3).join(' ')}{' '}
                   <span className="text-secondary">{t.home.heroTitle.split(' ').slice(-3).join(' ')}</span>
@@ -203,7 +203,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease, delay: 0.2 }}
-                  className="mb-8 mt-6 max-w-xl text-base leading-relaxed text-gray-300 md:text-lg"
+                  className="mb-8 mt-6 max-w-xl text-base leading-relaxed text-gray-700 md:text-lg"
                 >
                   {t.home.heroDesc}
                 </motion.p>
@@ -226,7 +226,7 @@ export default function Home() {
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} className="inline-flex">
                     <Link
                       to="/contact"
-                      className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-transparent px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:border-white/60 hover:bg-white/10"
+                      className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/60 px-7 py-3.5 text-sm font-semibold text-gray-800 backdrop-blur-sm transition-all duration-300 hover:border-gray-900 hover:bg-white"
                     >
                       <Phone className="h-4 w-4" />
                       {t.home.contactBtn}
@@ -248,9 +248,9 @@ export default function Home() {
                   className="flex items-center justify-center w-full"
                 >
                   <img
-                    src="/logo-white.png"
+                    src="/logo.png"
                     alt="Al Wthaq Group"
-                    className="w-[85%] sm:w-[90%] md:w-full max-w-[500px] lg:max-w-[600px] mx-auto h-auto object-contain drop-shadow-2xl"
+                    className="w-[85%] sm:w-[90%] md:w-full max-w-[500px] lg:max-w-[600px] mx-auto h-auto object-contain drop-shadow-xl"
                   />
                 </motion.div>
               </motion.div>
