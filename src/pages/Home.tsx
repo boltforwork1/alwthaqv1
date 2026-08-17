@@ -158,8 +158,8 @@ export default function Home() {
         <div className="relative z-10 flex min-h-screen items-center">
           <div className="mx-auto w-full max-w-7xl px-4 py-16 md:px-8 md:py-24 lg:px-12">
             <div className="grid grid-cols-1 items-center gap-10 md:gap-12 lg:grid-cols-2">
-              {/* Left column — text wrapped in a glass card for readability */}
-              <div className="flex flex-col gap-6 bg-white/75 backdrop-blur-md p-8 md:p-10 rounded-[2rem] shadow-2xl border border-white/60">
+              {/* Left column — text */}
+              <div className="flex flex-col gap-6">
                 <span className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/50 px-4 py-1 text-sm font-medium text-gray-800 shadow-sm drop-shadow-sm backdrop-blur-sm">
                   <motion.span
                     animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8], filter: ['blur(2px)', 'blur(0px)', 'blur(2px)'] }}
@@ -193,17 +193,17 @@ export default function Home() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease, delay: 0.1 }}
-                  className="text-3xl font-bold leading-tight tracking-tight text-gray-900 drop-shadow-[0_2px_10px_rgba(0,0,0,0.2)] sm:text-4xl md:text-5xl lg:text-6xl"
+                  className="text-3xl font-bold leading-tight tracking-tight text-gray-900 [-webkit-text-stroke:2px_white] [text-shadow:0_4px_20px_rgba(255,255,255,1)] sm:text-4xl md:text-5xl lg:text-6xl"
                 >
                   {t.home.heroTitle.split(' ').slice(0, -3).join(' ')}{' '}
-                  <span className="text-secondary">{t.home.heroTitle.split(' ').slice(-3).join(' ')}</span>
+                  <span className="text-secondary [-webkit-text-stroke:1px_white] [text-shadow:0_2px_10px_rgba(255,255,255,0.8)]">{t.home.heroTitle.split(' ').slice(-3).join(' ')}</span>
                 </motion.h1>
 
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease, delay: 0.2 }}
-                  className="max-w-xl text-base leading-relaxed text-gray-700 drop-shadow-md md:text-lg"
+                  className="max-w-xl text-base leading-relaxed text-gray-900 [text-shadow:-1px_-1px_0_#fff,1px_-1px_0_#fff,-1px_1px_0_#fff,1px_1px_0_#fff,0_0_15px_rgba(255,255,255,1)] md:text-lg"
                 >
                   {t.home.heroDesc}
                 </motion.p>
