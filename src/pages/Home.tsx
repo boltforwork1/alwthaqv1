@@ -160,11 +160,11 @@ export default function Home() {
             <div className="grid grid-cols-1 items-center gap-10 md:gap-12 lg:grid-cols-2">
               {/* Left column — text */}
               <div className="flex flex-col gap-6">
-                <span className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/50 px-4 py-1 text-sm font-medium text-gray-800 shadow-sm drop-shadow-sm backdrop-blur-sm">
+                <span className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/50 px-4 py-1 text-sm font-medium text-[#B32025] shadow-sm drop-shadow-md backdrop-blur-sm">
                   <motion.span
                     animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8], filter: ['blur(2px)', 'blur(0px)', 'blur(2px)'] }}
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                    className="h-2 w-2 rounded-full bg-[#1B753C]"
+                    className="h-2 w-2 rounded-full bg-[#B32025]"
                   />
                   {t.home.badge}
                 </span>
@@ -193,17 +193,17 @@ export default function Home() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease, delay: 0.1 }}
-                  className="text-3xl font-bold leading-tight tracking-tight text-gray-900 [-webkit-text-stroke:2px_white] [text-shadow:0_4px_20px_rgba(255,255,255,1)] sm:text-4xl md:text-5xl lg:text-6xl"
+                  className="text-3xl font-bold leading-tight tracking-tight text-gray-950 drop-shadow-lg sm:text-4xl md:text-5xl lg:text-6xl"
                 >
                   {t.home.heroTitle.split(' ').slice(0, -3).join(' ')}{' '}
-                  <span className="text-secondary [-webkit-text-stroke:1px_white] [text-shadow:0_2px_10px_rgba(255,255,255,0.8)]">{t.home.heroTitle.split(' ').slice(-3).join(' ')}</span>
+                  <span className="text-[#1B753C] drop-shadow-lg">{t.home.heroTitle.split(' ').slice(-3).join(' ')}</span>
                 </motion.h1>
 
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease, delay: 0.2 }}
-                  className="max-w-xl text-base leading-relaxed text-gray-900 [text-shadow:-1px_-1px_0_#fff,1px_-1px_0_#fff,-1px_1px_0_#fff,1px_1px_0_#fff,0_0_15px_rgba(255,255,255,1)] md:text-lg"
+                  className="max-w-xl text-base font-medium leading-relaxed text-gray-900 drop-shadow-md md:text-lg"
                 >
                   {t.home.heroDesc}
                 </motion.p>
