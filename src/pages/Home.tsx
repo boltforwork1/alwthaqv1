@@ -158,9 +158,9 @@ export default function Home() {
         <div className="relative z-10 flex min-h-screen items-center">
           <div className="mx-auto w-full max-w-7xl px-4 py-16 md:px-8 md:py-24 lg:px-12">
             <div className="grid grid-cols-1 items-center gap-10 md:gap-12 lg:grid-cols-2">
-              {/* Left column — text */}
-              <div>
-                <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/50 px-4 py-1 text-sm font-medium text-gray-800 shadow-sm drop-shadow-sm backdrop-blur-sm">
+              {/* Left column — text wrapped in a glass card for readability */}
+              <div className="flex flex-col gap-6 bg-white/75 backdrop-blur-md p-8 md:p-10 rounded-[2rem] shadow-2xl border border-white/60">
+                <span className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/50 px-4 py-1 text-sm font-medium text-gray-800 shadow-sm drop-shadow-sm backdrop-blur-sm">
                   <motion.span
                     animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8], filter: ['blur(2px)', 'blur(0px)', 'blur(2px)'] }}
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
@@ -174,7 +174,7 @@ export default function Home() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                  className="block md:hidden my-6 w-3/4 max-w-[250px] mx-auto"
+                  className="block md:hidden w-3/4 max-w-[250px] mx-auto"
                 >
                   <motion.div
                     animate={{ y: [0, -15, 0] }}
@@ -203,7 +203,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease, delay: 0.2 }}
-                  className="mb-8 mt-6 max-w-xl text-base leading-relaxed text-gray-700 drop-shadow-md md:text-lg"
+                  className="max-w-xl text-base leading-relaxed text-gray-700 drop-shadow-md md:text-lg"
                 >
                   {t.home.heroDesc}
                 </motion.p>
